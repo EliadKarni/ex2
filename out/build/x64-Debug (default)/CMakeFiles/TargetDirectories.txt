@@ -1,0 +1,7 @@
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/CMakeFiles/ex2.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/include/CMakeFiles/edit_cache.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/include/CMakeFiles/rebuild_cache.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/src/CMakeFiles/edit_cache.dir
+D:/Projects/Visual Studio Projects/שנה ב'/סמסטר א'/ex2/out/build/x64-Debug (default)/src/CMakeFiles/rebuild_cache.dir
