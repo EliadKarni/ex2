@@ -2,4 +2,10 @@
 	                        "player.cpp"
 							"player_state.cpp"
 							"Controller.cpp"
-							"LinkedList.cpp")
+							"LinkedList.cpp"
+							"Coin.cpp"
+							"io.cpp"
+							"Ladder.cpp"
+							"Location.cpp"
+							"Map.cpp"
+							"Rod.cpp")

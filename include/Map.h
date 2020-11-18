@@ -8,13 +8,13 @@
 
 class Map {
 private:
-	char** StageMap;
-	int MapSize, NumOfCoins;
+	char** StageMap; //i prefer int map so we'll could calc quiqest path for the enemyes
+	int MapSize, NumOfCoins;  //Num of coins will be stored on the coins LinkedList
 
 public:
 	Map();
-	bool isCoinExist(const Location& point);
-	void CoinCollected();
+	bool isCoinExist(const Location& point); //controller supporsed to deal with it
+	void CoinCollected(); //same^^
 	char** getStageMap();
 	int getMapSize();
 };
