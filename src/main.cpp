@@ -17,8 +17,10 @@ using std::endl;
 //------------------------------ main section --------------------------------
 int main()
 {
-	PlayerState state = PlayerState();
-	cout << "life is: "<< state.getLifeState() << endl
-		<< "score is: " << state.getScoreState()<< endl;
-	return 0;
+	PlayerState playeState = PlayerState();
+	playeState.getLifeState() == 0 ?
+		cout << "you lost!\n":
+		cout << "you won!\n";
+	cout << "youre score is: " << playeState.getScoreState();
+	return (EXIT_SUCCESS);
 }

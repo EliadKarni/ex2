@@ -10,20 +10,20 @@
  * input: array of 3 Vertexes.
  * output: none.
 */
-PlayerState::PlayerState() : life(3), score(0) {}
+PlayerState::PlayerState() : life(NUM_OF_LIFE), score(0) {}
 //------------------------------ gets section --------------------------------
 /*----------------------------------------------------------------------------
  * The get method 
  * input: 
  * output: .
 */
-int PlayerState::getLifeState() { return(this->life);}
+int PlayerState::getLifeState() const { return(this->life);}
 /*----------------------------------------------------------------------------
  * The get method
  * input:
  * output: .
 */
-int PlayerState::getScoreState() { return(this->score);}
+int PlayerState::getScoreState() const { return(this->score);}
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
  * The method 

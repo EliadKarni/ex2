@@ -1,3 +1,22 @@
 # ninja log v5
 1	609	627411379	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
 609	1116	627411380	ex2.exe	105ee3979736b97b
+0	9	0	clean	9992afb1f91dc381
+1	773	627411958	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+1	9	0	clean	9992afb1f91dc381
+1	958	627435951	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+1	726	627436135	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+0	714	627436341	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+0	9	0	clean	9992afb1f91dc381
+0	686	627436450	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+0	9	0	clean	9992afb1f91dc381
+0	636	627436491	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+1	511	627436546	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+511	735	627436547	ex2.exe	105ee3979736b97b
+0	49	627436624	CMakeFiles/ex2.dir/src/player.cpp.obj	95cc49bd805c44b
+10	53	627436624	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
+7	59	627436624	CMakeFiles/ex2.dir/src/player_state.cpp.obj	a7f0b90ee36e518
+4	541	627436625	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+541	858	627436625	ex2.exe	88aa7975c0b73bd1
+0	509	627436833	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+509	751	627436833	ex2.exe	88aa7975c0b73bd1
