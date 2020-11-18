@@ -9,6 +9,7 @@
 
  //---------------------------- include section -------------------------------
 #include <iostream>
+#include "player_state.h"
 //------------------------------ using section -------------------------------
 using std::cin;
 using std::cout;
@@ -16,6 +17,8 @@ using std::endl;
 //------------------------------ main section --------------------------------
 int main()
 {
-	cout << "tnx Mich." << endl;
+	PlayerState state = PlayerState();
+	cout << "life is: "<< state.getLifeState() << endl
+		<< "score is: " << state.getScoreState()<< endl;
 	return 0;
 }
