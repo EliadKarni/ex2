@@ -2,6 +2,8 @@
 
 #include <vector>
 #include "Location.h"
+//------------------------------ using section -------------------------------
+using std::vector;
 
 #define WALL #
 #define LADDER H
@@ -18,3 +20,7 @@ public:
 	bool isMovePossible(const Location& precentLoc, const Location& wantedLoc);
 	//add find shortest path method
 };
+
+int main() {
+
+}
