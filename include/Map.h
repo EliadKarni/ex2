@@ -3,18 +3,27 @@
 #include <iostream>
 #include"Location.h"
 #include "Coin.h"
-#include "Ladder.h"
-#include "Rod.h"
+#include "LinkedList.h"
+#include <ostream>
+#include "io.h"
+using std::ifstream;
+
+#define WALL #
+#define FLOOR #
+#define LADDER H
+#define ROD  -
 
 class Map {
 private:
-	char** StageMap; //i prefer int map so we'll could calc quiqest path for the enemyes
-	int MapSize, NumOfCoins;  //Num of coins will be stored on the coins LinkedList
-
+	char** StageMap;
+	int MapSize, NumOfCoins;
+	
 public:
-	Map();
-	bool isCoinExist(const Location& point); //controller supporsed to deal with it
-	void CoinCollected(); //same^^
-	char** getStageMap();
-	int getMapSize();
+	Map(ifstream);
+	~Map();
+	bool isCoinExist(const Location& point);
+	char** getStageMap()const;
+	int getMapSize() const;
+	void CreateStageMap(ifstream);
+	bool isMovePossible(const Location&, int);
 };
