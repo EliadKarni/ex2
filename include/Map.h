@@ -5,9 +5,9 @@
 
 using std::vector;
 
-#define WALL #
-#define LADDER H
-#define ROD  -
+#define WALL '#'
+#define LADDER 'H'
+#define ROD  '-'
 
 #define CLIME 'c'
 #define WALK 'w'
@@ -22,5 +22,5 @@ public:
 	Map(vector<vector<char>> *input = nullptr) : stageMap(input) {}
 	~Map();
 	Location isMovePossible(const Location& precentLoc, int wantedMove);
-	Location calcEnemyMove(const Location& precentLoc, const Location& playerLoc)//add find shortest path method
+	Location calcEnemyMove(const Location& precentLoc, const Location& playerLoc);//add find shortest path method
 };

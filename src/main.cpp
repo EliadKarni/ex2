@@ -8,31 +8,32 @@
  */
 
  //---------------------------- include section ------------------------------
+#include <fstream>
 #include <iostream>
-#include <string.h>
-#include <vector>
 #include "player_state.h"
 #include "Controller.h"
 //----------------------------- define section -------------------------------
-#define LEVEL1PATH "\levels\level.txt"
-#define LEVEL2PATH "\levels\leve2.txt"
+#define BOARD_PATH "\levels\level.txt"
 
 //------------------------------ using section -------------------------------
 using std::vector;
 using std::string;
+using std::ifstream;
 //------------------------------ main section --------------------------------
 int main()
 {
 	//--------------------- parameters declareation --------------------------
-	vector<string> levelsPathes = {LEVEL1PATH, LEVEL2PATH};
 	PlayerState playeState = PlayerState();
-	
-	//---------------------------------running levels---------------------------------------
-	for (int i = 0; 
-		i < levelsPathes.size() && playeState.getLifeState() != 0; ++i) {
-		Controller levelController = Controller(levelsPathes[i]);
-		levelController.runGame(playeState);
+	Controller gameContraller = Controller();
+	std::ifstream boardReader;
+
+	boardReader.open(BOARD_PATH);
+	if (!boardReader.is_open()){
+		std::cerr << "game loading eroor!\n";
+		return EXIT_FAILURE;
 	}
+	//---------------------------------running games---------------------------------------
+	gameContraller.runGame(boardReader);
 
 	return (EXIT_SUCCESS);
 }

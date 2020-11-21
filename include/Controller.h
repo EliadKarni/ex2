@@ -1,5 +1,6 @@
 #pragma once
 #include <string.h>
+#include <fstream>
 #include <vector>
 #include "player.h"
 #include "player_state.h"
@@ -7,19 +8,21 @@
 
 using std::vector;
 using std::string;
+using std::fstream;
 
 class Controller {
 public:
-	Controller(const string &filename = "");
-	~Controller();
+	Controller();
 	
-	void runGame(PlayerState &state);
+	void runGame(fstream &boardsReader, PlayerState &state);
+	int loadLevel(fstream& boardsReader, int index);
 	void printScreen();
-	void playerDied();
-	bool playEnemyesTurn();
+	void playEnemyesTurn();
+	void playPlayerTurn();
+	bool checkClashes();
 private:
 	Map m_map;
 	vector<Location> m_coinsList;
-	vector<Location> m_enemyList;
+	vector<Enemy> m_enemyList;
 	Player m_player;
 };
