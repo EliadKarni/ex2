@@ -20,3 +20,6 @@
 541	858	627436625	ex2.exe	88aa7975c0b73bd1
 0	509	627436833	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
 509	751	627436833	ex2.exe	88aa7975c0b73bd1
+0	563	627658592	CMakeFiles/ex2.dir/src/player.cpp.obj	95cc49bd805c44b
+10	578	627658592	CMakeFiles/ex2.dir/src/player_state.cpp.obj	a7f0b90ee36e518
+24	1209	627658593	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e

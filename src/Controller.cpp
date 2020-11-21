@@ -5,27 +5,40 @@
  //---------------------------- include section -------------------------------
 #include "Controller.h"
 #include "Enemy.h"
+#include <iostream>
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
  * input: array of 3 Vertexes.
  * output: none.
 */
+Controller::Controller() {
+	this->m_map = Map();
+	this->m_coinsList = LinkedList();
+	this->m_enemyList = LinkedList();
+	this->m_player = Player();
+}
+
+Controller::~Controller() {
+	delete m_coinsList;
+}
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
  * The method
  * input: .
  * output:
 */
-void Controller::runGame() {
-	while (this->m_state.getLifeState() != 0 
+void Controller::runGame(PlayerState& state) {
+	while (state.getLifeState() != 0 
 		&& this->m_coinsList.m_size != 0){
 		Node *coinsCounter = this->m_coinsList.m_root;
 
 		this->printScreen();
 		this->m_player.playerTurn();
-		playEnemyesTurn();
-		checkIfCoinCollected();
+		if ((*this).playEnemyesTurn()) {
+			state.die();
+		}
+			
 	}
 }
 /*----------------------------------------------------------------------------
@@ -33,7 +46,7 @@ void Controller::runGame() {
  * input: .
  * output:
 */
-void Controller::playEnemyesTurn() {
+bool Controller::playEnemyesTurn() {
 	Node* enemyTurnCounter = this->m_enemyList.m_root;
 	while (enemyTurnCounter != nullptr)
 	{
@@ -41,10 +54,11 @@ void Controller::playEnemyesTurn() {
 			playerTurn(this->m_player.getLocation());
 		if (((Enemy*)(enemyTurnCounter->m_data))->getLocation() ==
 			this->m_player.getLocation())
-			this->playerDied();
+			return(true);
 		else
 			enemyTurnCounter = enemyTurnCounter->m_next;
 	}
+	return false;
 }
 /*----------------------------------------------------------------------------
  * The method

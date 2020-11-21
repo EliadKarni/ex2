@@ -19,11 +19,13 @@ private:
 	int MapSize, NumOfCoins;
 	
 public:
-	Map(ifstream);
+	Map();// i needed a default constractor
+	Map(ifstream); //define it by unsigned int as its size, if 0 stage map = nullptr
 	~Map();
-	bool isCoinExist(const Location& point);
-	char** getStageMap()const;
-	int getMapSize() const;
-	void CreateStageMap(ifstream);
+	bool isCoinExist(const Location& point); //not needed
+	char** getStageMap()const; //not needed
+	int getMapSize() const; //not needed
+	void CreateStageMap(ifstream); //not needed
 	bool isMovePossible(const Location&, int);
+	//add find shortest path method
 };

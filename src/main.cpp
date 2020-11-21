@@ -7,9 +7,16 @@
  *
  */
 
- //---------------------------- include section -------------------------------
+ //---------------------------- include section ------------------------------
 #include <iostream>
+#include <string.h>
 #include "player_state.h"
+#include "Controller.h"
+//----------------------------- define section -------------------------------
+#define NUM_OF_LEVELS 2
+#define LEVEL1PATH "\levels\level.txt"
+#define LEVEL2PATH "\levels\leve2.txt"
+
 //------------------------------ using section -------------------------------
 using std::cin;
 using std::cout;
@@ -17,10 +24,16 @@ using std::endl;
 //------------------------------ main section --------------------------------
 int main()
 {
+	//--------------------- parameters declareation --------------------------
+	std::string levelsPathes[NUM_OF_LEVELS] = { LEVEL1PATH, LEVEL2PATH };
 	PlayerState playeState = PlayerState();
-	playeState.getLifeState() == 0 ?
-		cout << "you lost!\n":
-		cout << "you won!\n";
-	cout << "youre score is: " << playeState.getScoreState();
+	
+	//---------------------------------running levels---------------------------------------
+	for (int i = 0; 
+		i < NUM_OF_LEVELS && playeState.getLifeState() != 0; ++i) {
+		Controller levelController = Controller(levelsPathes[i]);
+		levelController.runGame(playeState);
+	}
+
 	return (EXIT_SUCCESS);
 }
