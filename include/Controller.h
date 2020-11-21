@@ -19,7 +19,6 @@ public:
 	void printScreen();
 	void playEnemyesTurn();
 	void playPlayerTurn();
-	bool checkClashes();
 private:
 	Map m_map;
 	vector<Location> m_coinsList;

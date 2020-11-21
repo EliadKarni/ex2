@@ -16,7 +16,7 @@ using std::vector;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
- * input: array of 3 Vertexes.
+ * input: .
  * output: none.
 */
 Controller::Controller() {
@@ -32,13 +32,27 @@ Controller::Controller() {
  * output:
 */
 void Controller::runGame(fstream &boardsReader, PlayerState& state) {
-	int nextlevelIndex = this->loadLevel(boardsReader, 0);
+	int nextlevelIndex = this->loadLevel(boardsReader, 0), 
+		levelIndex = 0, 
+		level = 1;
 	while (state.getLifeState() != 0){
 		this->printScreen();
 		this->playPlayerTurn();
 		this->playEnemyesTurn();
-		if (this->checkClashes()) {
-			
+		for (int i = 0; i < this->m_enemyList.size(); ++i)
+			if (this->m_enemyList[i].getLocation() ==
+				this->m_player.getLocation()) {
+				state.die();
+				this->loadLevel(boardsReader, levelIndex);
+			}
+		for (int i = 0; i < this->m_coinsList.size(); ++i)
+			if (this->m_coinsList[i] == this->m_player.getLocation()) {
+				this->m_coinsList.erase(this->m_coinsList.begin() + i);
+				state.collectCoin(level);
+			}
+		if (this->m_coinsList.size() == 0) {
+			levelIndex = nextlevelIndex;
+			nextlevelIndex = this->loadLevel(boardsReader, levelIndex);
 		}
 	}
 }
@@ -124,19 +138,16 @@ int Controller::loadLevel(fstream& boardsReader, int index) {
  * input: .
  * output:
 */
-bool Controller::playEnemyesTurn() {
-	Node* enemyTurnCounter = this->m_enemyList.m_root;
-	while (enemyTurnCounter != nullptr)
-	{
-		((Enemy*)(enemyTurnCounter->m_data))->
-			playerTurn(this->m_player.getLocation());
-		if (((Enemy*)(enemyTurnCounter->m_data))->getLocation() ==
-			this->m_player.getLocation())
-			return(true);
-		else
-			enemyTurnCounter = enemyTurnCounter->m_next;
-	}
-	return false;
+void Controller::playEnemyesTurn() {
+	for(int i = 0; i < this->m_enemyList.size(); ++i)
+		this->m_enemyList[i].playerTurn(this->m_player.getLocation());
+}
+/*----------------------------------------------------------------------------
+ * The method
+ * input: .
+ * output:
+*/
+void Controller::playPlayerTurn() {
 }
 /*----------------------------------------------------------------------------
  * The method
