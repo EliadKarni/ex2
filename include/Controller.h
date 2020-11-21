@@ -1,13 +1,16 @@
 #pragma once
 #include <string.h>
-#include "LinkedList.h"
+#include <vector>
 #include "player.h"
 #include "player_state.h"
 #include "Map.h"
 
+using std::vector;
+using std::string;
+
 class Controller {
 public:
-	Controller();
+	Controller(const string &filename = "");
 	~Controller();
 	
 	void runGame(PlayerState &state);
@@ -16,7 +19,7 @@ public:
 	bool playEnemyesTurn();
 private:
 	Map m_map;
-	LinkedList m_coinsList;
-	LinkedList m_enemyList;
+	vector<Location> m_coinsList;
+	vector<Location> m_enemyList;
 	Player m_player;
 };

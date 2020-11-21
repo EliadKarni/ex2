@@ -10,27 +10,26 @@
  //---------------------------- include section ------------------------------
 #include <iostream>
 #include <string.h>
+#include <vector>
 #include "player_state.h"
 #include "Controller.h"
 //----------------------------- define section -------------------------------
-#define NUM_OF_LEVELS 2
 #define LEVEL1PATH "\levels\level.txt"
 #define LEVEL2PATH "\levels\leve2.txt"
 
 //------------------------------ using section -------------------------------
-using std::cin;
-using std::cout;
-using std::endl;
+using std::vector;
+using std::string;
 //------------------------------ main section --------------------------------
 int main()
 {
 	//--------------------- parameters declareation --------------------------
-	std::string levelsPathes[NUM_OF_LEVELS] = { LEVEL1PATH, LEVEL2PATH };
+	vector<string> levelsPathes = {LEVEL1PATH, LEVEL2PATH};
 	PlayerState playeState = PlayerState();
 	
 	//---------------------------------running levels---------------------------------------
 	for (int i = 0; 
-		i < NUM_OF_LEVELS && playeState.getLifeState() != 0; ++i) {
+		i < levelsPathes.size() && playeState.getLifeState() != 0; ++i) {
 		Controller levelController = Controller(levelsPathes[i]);
 		levelController.runGame(playeState);
 	}

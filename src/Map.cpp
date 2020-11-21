@@ -1,14 +1,10 @@
 #pragma once
 #include "Map.h"
-#include "Location.h"
-#include "io.h"
-#include <ostream>
-#include <string>
-using std::ifstream;
-using std::cerr;
-using std::nothrow;
+#include <vector>
 
-Map::Map(ifstream fileReader)
+using std::vector;
+
+Map::Map(vector<vector<int>>)
 {
 	fileReader >> this->MapSize; //read the size of the map
 	fileReader >> getc();        //break line

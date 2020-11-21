@@ -3,16 +3,19 @@
  *
  */
  //---------------------------- include section -------------------------------
+#include <iostream>
+#include <string>
 #include "Controller.h"
 #include "Enemy.h"
-#include <iostream>
+
+using std::string;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
  * input: array of 3 Vertexes.
  * output: none.
 */
-Controller::Controller() {
+Controller::Controller(const string &filename) {
 	this->m_map = Map();
 	this->m_coinsList = LinkedList();
 	this->m_enemyList = LinkedList();
