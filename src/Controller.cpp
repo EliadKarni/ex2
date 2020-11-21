@@ -12,14 +12,11 @@ using std::string;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
- * input: array of 3 Vertexes.
- * output: none.
+ * input: .
+ * output: .
 */
 Controller::Controller(const string &filename) {
-	this->m_map = Map();
-	this->m_coinsList = LinkedList();
-	this->m_enemyList = LinkedList();
-	this->m_player = Player();
+	ifstream
 }
 
 Controller::~Controller() {

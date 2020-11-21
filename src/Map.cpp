@@ -4,7 +4,7 @@
 //------------------------------ using section -------------------------------
 using std::vector;
 
-Map::Map(vector<vector<int>>)
+Map::Map(vector<vector<char>>)
 {
 	fileReader >> this->MapSize; //read the size of the map
 	fileReader >> getc();        //break line
