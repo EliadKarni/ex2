@@ -1,12 +1,10 @@
 #pragma once
-#include <fstream>
 #include <iostream>
-#include"Location.h"
-#include "Coin.h"
-#include "LinkedList.h"
+#include <fstream>
 #include <ostream>
-#include "io.h"
 #include <vector>
+#include"Location.h"
+#include "io.h"
 using std::ifstream;
 using std::vector;
 //===============================================
@@ -25,13 +23,17 @@ private:
 	vector<vector<char>> StageMap;
 	int MapSize, NumOfCoins; 
 	Location InitialPlayerLocation;
-	vector<Location> InitalsEnemyLocations;
+	vector<Location> InitalsEnemyLocationsList;
 	
 public:
 	Map(ifstream&);
 	bool isCoinExist(const Location& point);
+	
 	vector<vector<char>> getStageMap()const;
 	int getMapSize() const;
+	Location GetInitialPlayerLocation() const;
+	vector<Location> GetInitalsEnemyLocationsList() const;
+	
 	void CreateStageMap(ifstream&);
 	Location isMovePossible(const Location&, int);
 	Location GetLocationAfterFallDown(Location);
