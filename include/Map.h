@@ -39,4 +39,5 @@ public:
 	Location DownMove(Location);
 	Location RightMove(Location);
 	Location LeftMove(Location);
+	Location EnemyMove(Location);
 };
