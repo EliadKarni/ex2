@@ -34,28 +34,27 @@ Controller::Controller() {
  * output: none.
 */
 void Controller::runGame(fstream &boardsReader, PlayerState& state) {
-	int nextlevelIndex = this->loadLevel(boardsReader, 0), 
-		levelIndex = 0, 
-		level = 1;
+	int	level = 1;
+	this->m_map.CreateStageMap(boardsReader); //TODO load map
 	while (state.getLifeState() != 0){
+		if (this->m_coinsList.size() == 0) {
+			++level;
+			// TODO load next level
+		}
 		//TODO print!!!
-		this->playPlayerTurn();
+		this->m_player.PlayTurn(this->m_map);
 		this->playEnemyesTurn();
 		for (int i = 0; i < this->m_enemyList.size(); ++i)
 			if (this->m_enemyList[i].getLocation() ==
 				this->m_player.getLocation()) {
 				state.die();
-				this->loadLevel(boardsReader, levelIndex);
+				// TODO reload level
 			}
-		for (int i = 0; i < this->m_coinsList.size(); ++i)
+		for (int i = 0; i < this->m_coinsList.size(); ++i) 
 			if (this->m_coinsList[i] == this->m_player.getLocation()) {
 				this->m_coinsList.erase(this->m_coinsList.begin() + i);
 				state.collectCoin(level);
 			}
-		if (this->m_coinsList.size() == 0) {
-			levelIndex = nextlevelIndex;
-			nextlevelIndex = this->loadLevel(boardsReader, levelIndex);
-		}
 	}
 }
 /*----------------------------------------------------------------------------
@@ -146,22 +145,7 @@ int Controller::loadLevel(fstream& boardsReader, int index) {
  * output:
 */
 void Controller::playEnemyesTurn() {
-	for(int i = 0; i < this->m_enemyList.size(); ++i)
-		this->m_enemyList[i].setLocation
-		(this->m_map.calcEnemyMove(this->m_enemyList[i].getLocation(),
-			this->m_player.getLocation()));
-}
-/*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
-*/
-void Controller::playPlayerTurn() {
-	Location newLocation = this->m_player.getLocation();
-	while (this->m_player.getLocation() == newLocation) {
-		newLocation =
-			m_map.isMovePossible(
-				this->m_player.getLocation(), Keyboard::getch()
-			);
-	}
+	for (int i = 0; i < this->m_enemyList.size(); ++i)
+		this->m_enemyList[i].playTurn(this->m_map,
+			this->m_player.getLocation());
 }

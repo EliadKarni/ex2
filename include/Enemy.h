@@ -1,5 +1,6 @@
 #pragma once
 #include "Location.h"
+#include "Map.h"
 
 #define ENEMY_SYMB '%'
 
@@ -7,9 +8,9 @@ class Enemy {
 public:
 	Enemy(Location location = Location(0, 0)) : m_location(location) {}
 
+	Location getLocation()const;
 	void setLocation(const Location& newlocation);
-	Location getLocation();
+	void playTurn(const Map &map, const Location &playerLocation);
 private:
 	Location m_location;
-
 };

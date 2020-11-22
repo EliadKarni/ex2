@@ -2,8 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include"Location.h"
-#include "Coin.h"
-#include "LinkedList.h"
 #include <ostream>
 #include "io.h"
 #include <vector>

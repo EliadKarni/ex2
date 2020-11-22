@@ -12,13 +12,11 @@ using std::fstream;
 
 class Controller {
 public:
-	Controller();
+	Controller(fstream &boardReader);
 	
 	void runGame(fstream &boardsReader, PlayerState &state);
 	int loadLevel(fstream& boardsReader, int index);
 	void playEnemyesTurn();
-	void playPlayerTurn();
-	int receiveLevelSize(fstream &boardsReader);
 private:
 	Map m_map;
 	vector<Location> m_coinsList;

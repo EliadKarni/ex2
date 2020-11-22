@@ -1,9 +1,9 @@
-/* player_state
+/* Player_state
  * ===========================================================================
  *
  */
 //---------------------------- include section -------------------------------
-#include "player_state.h"
+#include "Player_state.h"
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
