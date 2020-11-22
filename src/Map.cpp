@@ -117,7 +117,7 @@ Location Map::LeftMove(Location Objloc) {
 //========================================================================
 Location Map::GetLocationAfterFallDown(Location objloc) {
 	int row=objloc.row+1;
-	while (StageMap[row][objloc.col] != NOTHING) {
+	while (StageMap[row][objloc.col] == NOTHING) {
 		row++;
 	}
 	return Location(row,objloc.col);
