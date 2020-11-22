@@ -122,3 +122,18 @@ Location Map::GetLocationAfterFallDown(Location objloc) {
 	}
 	return Location(row,objloc.col);
 }
+//========================================================================
+Location Map::EnemyMove(Location EnemyLoc) {
+	srand(time(NULL));
+	int randMove = (rand() % 4) + 1; 
+	switch (randMove) {
+	case 1: //move enemy up
+		return Location(EnemyLoc.row - 1, EnemyLoc.col);
+	case 2: //move enemy left
+		return Location(EnemyLoc.row, EnemyLoc.col - 1);
+	case 3: //move enemy right
+		return Location(EnemyLoc.row, EnemyLoc.col + 1);
+	}
+	//move enemy down:
+	return Location(EnemyLoc.row+1,EnemyLoc.col)
+}
