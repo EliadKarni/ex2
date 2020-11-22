@@ -6,12 +6,10 @@
 
 class Player {
 public:
-	Player(Location location = Location(0, 0), char mode = PLAYER_STAND_MODE)
-		: m_location(location), m_playerMode(mode) {}
+	Player(Location location = Location(0, 0))
+		: m_location(location) {}
 
 	Location getLocation();
-	char getMod();
 private:
 	Location m_location;
-	char m_playerMode;
 };

@@ -16,9 +16,9 @@ public:
 	
 	void runGame(fstream &boardsReader, PlayerState &state);
 	int loadLevel(fstream& boardsReader, int index);
-	void printScreen();
 	void playEnemyesTurn();
 	void playPlayerTurn();
+	int receiveLevelSize(fstream &boardsReader);
 private:
 	Map m_map;
 	vector<Location> m_coinsList;

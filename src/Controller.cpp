@@ -10,13 +10,14 @@
 #include <vector>
 #include "Controller.h"
 #include "Enemy.h"
+#include "io.h"
 
 using std::fstream;
 using std::vector;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
- * input: .
+ * input: The constractor is the default constractor.
  * output: none.
 */
 Controller::Controller() {
@@ -27,16 +28,17 @@ Controller::Controller() {
 }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is loading the level, then running the levels till the game
+ * ends.
+ * input: levels info file reader, the game state.
+ * output: none.
 */
 void Controller::runGame(fstream &boardsReader, PlayerState& state) {
 	int nextlevelIndex = this->loadLevel(boardsReader, 0), 
 		levelIndex = 0, 
 		level = 1;
 	while (state.getLifeState() != 0){
-		this->printScreen();
+		//TODO print!!!
 		this->playPlayerTurn();
 		this->playEnemyesTurn();
 		for (int i = 0; i < this->m_enemyList.size(); ++i)
@@ -57,16 +59,20 @@ void Controller::runGame(fstream &boardsReader, PlayerState& state) {
 	}
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is loading the level next to the location in the board file.
+ * update the controller values by the received level info.
+ * input: fstream to the levels info file, levels location in the file.
+ * output: the next level's location in the file.
 */
 int Controller::loadLevel(fstream& boardsReader, int index) {
+	//------------------------ parameters declaretion ---------------------------
 	string input;
 	bool playerReceived = false;
 	int size = 0;
 	vector<vector<int>> tempMap;
 
+	//------------------------------------ receiving level's size ---------------------------------------
+	size = receiveLevelSize(boardsReader);
 	boardsReader >> input;
 	for (int i = 0; i < input.length(); ++i) {
 		if (isdigit(input[i])) {
@@ -82,6 +88,7 @@ int Controller::loadLevel(fstream& boardsReader, int index) {
 	for (int i = 0; i < size; ++i) {
 		for (int j = 0; j < size; ++j) {
 			char input = boardsReader.get();
+			//check the value of the next char at the file.
 			switch (input){
 			case ' ':
 				tempMap[i].push_back(input);
@@ -140,7 +147,9 @@ int Controller::loadLevel(fstream& boardsReader, int index) {
 */
 void Controller::playEnemyesTurn() {
 	for(int i = 0; i < this->m_enemyList.size(); ++i)
-		this->m_enemyList[i].playerTurn(this->m_player.getLocation());
+		this->m_enemyList[i].setLocation
+		(this->m_map.calcEnemyMove(this->m_enemyList[i].getLocation(),
+			this->m_player.getLocation()));
 }
 /*----------------------------------------------------------------------------
  * The method
@@ -148,12 +157,11 @@ void Controller::playEnemyesTurn() {
  * output:
 */
 void Controller::playPlayerTurn() {
-}
-/*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
-*/
-void Controller::printScreen() {
-
+	Location newLocation = this->m_player.getLocation();
+	while (this->m_player.getLocation() == newLocation) {
+		newLocation =
+			m_map.isMovePossible(
+				this->m_player.getLocation(), Keyboard::getch()
+			);
+	}
 }
