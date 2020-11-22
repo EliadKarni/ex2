@@ -1,17 +1,30 @@
 #pragma once
+//------------------------------ defines section -----------------------------
 #define NUM_OF_LIFE 3
-#define COIN_SCORE 50
+#define COIN_SCORE 2
 #define LEVEL_UP_SCORE 50
 
+/*PlayerState
+ The class is follow the player state throue the game and updete its:
+ score, life counter and its level.
+*/
 class PlayerState {
 public:
-	PlayerState();
+	//------------------------- constractors section -------------------------
 	
-	int getLifeState()const;
-	int getScoreState()const;
+	PlayerState();
+	//-------------------------- gets section --------------------------------
+	
+	unsigned int getLifeState()const;
+	unsigned int getScoreState()const;
+	unsigned int getLevelState()const;
+	//------------------------- method section -------------------------------
+	
 	void die();
-	void collectCoin(int level);
+	void collectCoin();
+	void levelup();
 private:
-	unsigned int life;
-	unsigned int score;
+	unsigned int m_life;
+	unsigned int m_score;
+	unsigned int m_level;
 };

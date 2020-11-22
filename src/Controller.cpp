@@ -5,7 +5,6 @@
  //---------------------------- include section -------------------------------
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <stdlib.h>
 #include <vector>
 #include "Controller.h"
@@ -59,7 +58,9 @@ void Controller::runGame() {
  * output:
 */
 void Controller::finishGame() {
-
+	std::cout << (this->m_state.getLifeState() == 0) ?
+		"you lost the game!\n" : "you won the game!\n";
+	std::cout << "your score is: " << this->m_state.getScoreState();
 }
 /*----------------------------------------------------------------------------
  * The method
