@@ -9,7 +9,6 @@
 
  //---------------------------- include section ------------------------------
 #include <fstream>
-#include <iostream>
 #include "player_state.h"
 #include "Controller.h"
 //----------------------------- define section -------------------------------
