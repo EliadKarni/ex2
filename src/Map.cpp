@@ -5,6 +5,7 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <time.h>
 using std::ifstream;
 
 //========================================================================
@@ -25,8 +26,10 @@ bool Map::isCoinExist(const Location& point)
 	return false;
 }
 //========================================================================
-char** Map::getStageMap() const { return StageMap; }
-int    Map::getMapSize()  const { return MapSize;  }
+char** Map::getStageMap()                            const { return StageMap; }
+int    Map::getMapSize()                             const { return MapSize;  }
+Location Map::GetInitialPlayerLocation()             const { return InitialPlayerLocation; }
+vector<Location> Map::GetInitalsEnemyLocationsList() const { return InitalsEnemyLocationsList; }
 //========================================================================
 /*
 * This function get a file reader from the Game Controller,
