@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 using std::ifstream;
-using std::getline;
+
 //========================================================================
 Map::Map(ifstream& fileReader)
 {
