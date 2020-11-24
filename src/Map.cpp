@@ -26,7 +26,7 @@ bool Map::isCoinExist(const Location& point)
 	return false;
 }
 //========================================================================
-char** Map::getStageMap()                            const { return StageMap; }
+vector<vector<char>> Map::getStageMap()              const { return StageMap; }
 int    Map::getMapSize()                             const { return MapSize;  }
 Location Map::GetInitialPlayerLocation()             const { return InitialPlayerLocation; }
 vector<Location> Map::GetInitalsEnemyLocationsList() const { return InitalsEnemyLocationsList; }
@@ -46,15 +46,16 @@ void Map::CreateStageMap(ifstream& fileReader)
 		//save initial locations of diff objs:
 		switch (c) {
 		case PLAYER: {
-			InitialPlayerLocation(row,StageMap[row].size()-1);
+			InitialPlayerLocation(row, StageMap[row].size() - 1);
 		}
 		case ENEMY: {
 			Location EnemyLocation(row, StageMap[row].size() - 1);
 			InitalsEnemyLocations.push_back(EnemyLocation);
 		}
-	}
-}
-	fileReader >> getc(); //ready to read the next map
+		fileReader >> c; 
+	    }
+    }
+	fileReader >> c; //ready to read the next map
 }
 //========================================================================
 /*
@@ -79,14 +80,14 @@ Location Map::isMovePossible(const Location& Objloc, int WantedMove )
 	}
 }
 //========================================================================
-Location Map::UpMove(Location Objloc) {
+Location Map::UpMove(const Location& Objloc) {
 	if (StageMap[Objloc.row][Objloc.col] == ON_LADDER)
 		return Location(Objloc.row - 1, Objloc.col);
 
 		return Objloc; //player can move up only on the ladder
 }
 //========================================================================
-Location Map::DownMove(Location Objloc) {
+Location Map::DownMove(const Location& Objloc) {
 	if (StageMap[Objloc.row + 1][Objloc.col] == WALL) //player can't move to the wall
 		return Objloc; 
 
@@ -96,7 +97,7 @@ Location Map::DownMove(Location Objloc) {
 	return GetLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
-Location Map::RightMove(Location Objloc) {
+Location Map::RightMove(const Location& Objloc) {
 	if (StageMap[Objloc.row][Objloc.col + 1] == WALL)
 		return Objloc;
 
@@ -107,7 +108,7 @@ Location Map::RightMove(Location Objloc) {
 	return Location(Objloc.row, Objloc.col + 1); //can move right
 }
 //========================================================================
-Location Map::LeftMove(Location Objloc) {
+Location Map::LeftMove(const Location& Objloc) {
 	if (StageMap[Objloc.row][Objloc.col - 1] == WALL) //player can't move to the wall
 		return Objloc;
 
@@ -118,7 +119,7 @@ Location Map::LeftMove(Location Objloc) {
 	return Location(Objloc.row, Objloc.col - 1); //can move left
 }
 //========================================================================
-Location Map::GetLocationAfterFallDown(Location objloc) {
+Location Map::GetLocationAfterFallDown(const Location& objloc) {
 	int row=objloc.row+1;
 	while (StageMap[row][objloc.col] == NOTHING) {
 		row++;
@@ -126,7 +127,7 @@ Location Map::GetLocationAfterFallDown(Location objloc) {
 	return Location(row,objloc.col);
 }
 //========================================================================
-Location Map::EnemyMove(Location EnemyLoc) {
+Location Map::FoolEnemy(const Location& EnemyLoc) {
 	srand(time(NULL));
 	int randMove = (rand() % 4) + 1; 
 	switch (randMove) {
@@ -139,4 +140,11 @@ Location Map::EnemyMove(Location EnemyLoc) {
 	}
 	//move enemy down:
 	return Location(EnemyLoc.row+1,EnemyLoc.col)
+}
+//========================================================================
+/*
+FUNCTION IN CONSRUCTION - NOT TO USE FOR NOW !!!
+*/
+Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
+
 }
