@@ -1,4 +1,6 @@
 #pragma once
+
+#define BOARD_PATH "\levels\level.txt"
 #include <string.h>
 #include <fstream>
 #include <vector>
@@ -19,10 +21,12 @@ public:
 	void finishGame();
 	bool playEnemyesTurn();
 	void checkForCoinsCollect(const int &level);
+	void playerDead();
 private:
 	Map m_map;
 	vector<Location> m_coinsList;
 	vector<Enemy> m_enemyList;
 	Player m_player;
 	PlayerState m_state;
+	ifstream boardReader;
 };

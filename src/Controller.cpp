@@ -45,7 +45,7 @@ void Controller::runGame() {
 		//-------------------------- play turns ------------------------------
 		this->m_player.PlayTurn(this->m_map);
 		if (this->playEnemyesTurn()) {
-			m_state.die();
+			this->playerDead();
 		}
 		//--------------------- check for coins collection -------------------
 		else
@@ -86,6 +86,19 @@ void Controller::checkForCoinsCollect(const int &level) {
 	for (int i = 0; i < this->m_coinsList.size(); ++i)
 		if (this->m_coinsList[i] == this->m_player.getLocation()) {
 			this->m_coinsList.erase(this->m_coinsList.begin() + i);
-			m_state.collectCoin(level);
+			m_state.collectCoin();
 		}
+}
+/*----------------------------------------------------------------------------
+ * The method
+ * input: .
+ * output:
+*/
+void Controller::playerDead() {
+	vector<Location> primeEnemysLoc = 
+		this->m_map.GetInitalsEnemyLocationsList();
+	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
+	for (int i = 0; i < this->m_enemyList.size(); ++i)
+		this->m_enemyList[i] = Enemy(primeEnemysLoc[i]);
+	this
 }

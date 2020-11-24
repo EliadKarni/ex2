@@ -8,31 +8,16 @@
  */
 
  //---------------------------- include section ------------------------------
-#include <fstream>
-#include "player_state.h"
 #include "Controller.h"
-//----------------------------- define section -------------------------------
-#define BOARD_PATH "\levels\level.txt"
-
 //------------------------------ using section -------------------------------
-using std::vector;
-using std::string;
 using std::ifstream;
 //------------------------------ main section --------------------------------
 int main()
 {
 	//--------------------- parameters declareation --------------------------
-	PlayerState playeState = PlayerState();
 	Controller gameContraller = Controller();
-	std::ifstream boardReader;
-
-	boardReader.open(BOARD_PATH);
-	if (!boardReader.is_open()){
-		std::cerr << "game loading eroor!\n";
-		return EXIT_FAILURE;
-	}
 	//---------------------------------running games---------------------------------------
-	gameContraller.runGame(boardReader);
+	gameContraller.runGame();
 
 	return (EXIT_SUCCESS);
 }

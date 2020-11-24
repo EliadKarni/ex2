@@ -21,13 +21,12 @@ using std::vector;
 class Map {
 private:
 	vector<vector<char>> StageMap;
-	int MapSize, NumOfCoins; 
+	int MapSize;
 	Location InitialPlayerLocation;
 	vector<Location> InitalsEnemyLocationsList;
 	
 public:
 	Map(ifstream&);
-	bool isCoinExist(const Location& point);
 	
 	vector<vector<char>> getStageMap()               const;
 	int getMapSize()                                 const;
