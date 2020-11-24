@@ -24,16 +24,17 @@ private:
 	int MapSize;
 	Location InitialPlayerLocation;
 	vector<Location> InitalsEnemyLocationsList;
+	ifstream FileReader;
 	
 public:
-	Map(ifstream&);
+	Map();
 	
 	vector<vector<char>> getStageMap()               const;
 	int getMapSize()                                 const;
 	Location GetInitialPlayerLocation()              const;
 	vector<Location> GetInitalsEnemyLocationsList()  const;
 	
-	void CreateStageMap                        (ifstream&);
+	void LoadNewStage();
 	Location isMovePossible         (const Location&, int);
 	Location GetLocationAfterFallDown    (const Location&);
 	Location UpMove                      (const Location&);
