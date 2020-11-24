@@ -43,9 +43,15 @@ void Map::LoadNewStage()
 		case PLAYER: {
 			InitialPlayerLocation(row, StageMap[row].size() - 1);
 		}
+				
 		case ENEMY: {
 			Location EnemyLocation(row, StageMap[row].size() - 1);
 			InitalsEnemyLocations.push_back(EnemyLocation);
+			
+		case ON_LADDER: {
+			InitialPlayerLocation(row, StageMap[row].size() - 1);
+		}
+			
 		}
 		fileReader >> c; 
 	    }
