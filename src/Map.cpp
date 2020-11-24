@@ -16,8 +16,7 @@ Map::Map()
 		std::cerr << "Game loading failed !  Make sure all files exist !";
 		return EXIT_FAILURE;
 	}
-	fileReader >> this->MapSize; //read the size of the map
-	fileReader >> getc();        //break line
+	
 	LoadNewStage();
 }
 //========================================================================
@@ -34,6 +33,10 @@ void Map::LoadNewStage()
 {
 	char c;
 	int row;
+	
+	fileReader >> this->MapSize; //read the size of the new stage
+	fileReader >> getc();        //break line
+	
 	for (row = 0; row < MapSize; row++)
 	{
 		fileReader >> c;
