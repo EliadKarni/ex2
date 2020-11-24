@@ -9,21 +9,16 @@
 using std::ifstream;
 
 //========================================================================
-Map::Map(ifstream& fileReader)
+Map::Map()
 {
+	FileReader.open("Board.txt");
+	if (!FileReader.is_open()) {
+		std::cerr << "Game loading failed !  Make sure all files exist !";
+		return EXIT_FAILURE;
+	}
 	fileReader >> this->MapSize; //read the size of the map
 	fileReader >> getc();        //break line
-	CreateStageMap(fileReader);
-}
-//========================================================================
-bool Map::isCoinExist(const Location& point)
-{
-	if (this->StageMap[point.col][point.row] == '*')
-	{
-		this->NumOfCoins--;
-		return true;
-	}
-	return false;
+	LoadNewStage();
 }
 //========================================================================
 vector<vector<char>> Map::getStageMap()              const { return StageMap; }
@@ -35,7 +30,7 @@ vector<Location> Map::GetInitalsEnemyLocationsList() const { return InitalsEnemy
 * This function get a file reader from the Game Controller,
 * and load a new stage from the Board.txt file.
 */
-void Map::CreateStageMap(ifstream& fileReader)
+void Map::LoadNewStage()
 {
 	char c;
 	int row;
