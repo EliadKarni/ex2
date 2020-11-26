@@ -45,4 +45,5 @@ public:
 	Location SmartEnemy(const Location&, const Location& );
 	bool isLevelsOver();
 	char GetContent(const Location&) const;
+	bool MapException(const Location&);
 };
