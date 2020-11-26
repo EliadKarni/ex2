@@ -180,3 +180,10 @@ char Map::GetContent(const Location& loc) const
 {
 	return StageMap[loc.row][loc.col];
 }
+//========================================================================
+bool Map::MapException(const Location& loc) {
+	if (StageMap[loc.row][loc.col] == WALL || loc.row == 0 || loc.col == 0)
+		return true;
+
+	return false;
+}
