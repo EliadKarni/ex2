@@ -44,4 +44,5 @@ public:
 	Location FoolEnemy                   (const Location&);
 	Location SmartEnemy(const Location&, const Location& );
 	bool isLevelsOver();
+	char GetContent(const Location&) const;
 };
