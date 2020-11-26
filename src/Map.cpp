@@ -14,10 +14,10 @@ Map::Map()
 	FileReader.open("Board.txt");
 	if (!FileReader.is_open()) {
 		std::cerr << "Game loading failed !  Make sure all files exist !";
-		return EXIT_FAILURE;
+		exit (EXIT_FAILURE);
 	}
 	fileReader >> this->MapSize; //read the size of the map
-	fileReader >> getc();        //break line
+	fileReader.getc();        //break line
 	LoadNewStage();
 }
 //========================================================================
