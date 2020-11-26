@@ -32,33 +32,50 @@ void Map::LoadNewStage()
 {
 	char c;
 	int row;
-	
-	fileReader >> this->MapSize; //read the size of the new stage
-	fileReader >> getc();        //break line
-	
+	bool player_exist=false;
+	FileReader >> this->MapSize; //read the size of the map
+	FileReader >> c;        //break line
 	for (row = 0; row < MapSize; row++)
 	{
-		fileReader >> c;
+		FileReader >> c;
+		if(c!=PLAYER && c!=ENEMY && c!=ON_LADDER)
 		StageMap[row].push_back(c);
 		//save initial locations of diff objs:
-		switch (c) {
-		case PLAYER: {
-			InitialPlayerLocation(row, StageMap[row].size() - 1);
+		else {
+			StageMap[row].push_back(' ');
+			switch (c) {
+			case PLAYER: {
+				if (!player_exist) {
+					this->InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					player_exist = true;
+					break;
+				}
+				else {
+					std::cout << "make sure there is one player on the map!";
+					EXIT_FAILURE;
+				}
+			}
+			case ENEMY: {
+				Location EnemyLocation(row, StageMap[row].size() - 1);
+				InitalsEnemyLocationsList.push_back(EnemyLocation);
+				break;
+			}
+			case ON_LADDER: {
+				if (!player_exist) {
+					InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					player_exist = true;
+					break;
+				}
+				else {
+					std::cout << "make sure there is one player on the map!";
+					EXIT_FAILURE;
+				}
+			}
+			}
 		}
-				
-		case ENEMY: {
-			Location EnemyLocation(row, StageMap[row].size() - 1);
-			InitalsEnemyLocations.push_back(EnemyLocation);
-			
-		case ON_LADDER: {
-			InitialPlayerLocation(row, StageMap[row].size() - 1);
-		}
-			
-		}
-		fileReader >> c; 
-	    }
-    }
-	fileReader >> c; //ready to read the next map
+		FileReader >> c; //break line
+	}
+	FileReader >> c; //ready to read the next stage
 }
 //========================================================================
 /*
@@ -157,4 +174,9 @@ bool Map::isLevelsOver() {
 		return true;
 
 	return false;
+}
+//========================================================================
+char Map::GetContent(const Location& loc) const
+{
+	return StageMap[loc.row][loc.col];
 }
