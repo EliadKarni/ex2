@@ -24,3 +24,8 @@
 10	578	627658592	CMakeFiles/ex2.dir/src/player_state.cpp.obj	a7f0b90ee36e518
 24	1209	627658593	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e
 0	58	0	clean	9992afb1f91dc381
+18	693	628116838	CMakeFiles/ex2.dir/src/Location.cpp.obj	8b4ecfa0b906e654
+6	694	628116838	CMakeFiles/ex2.dir/src/Player_state.cpp.obj	863edc37273cbe52
+21	1032	628116838	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e
+9	1195	628116838	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+4	752	628116971	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519

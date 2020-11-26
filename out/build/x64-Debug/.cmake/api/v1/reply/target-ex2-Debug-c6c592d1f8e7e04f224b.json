@@ -101,11 +101,7 @@
 				3,
 				4,
 				5,
-				6,
-				7,
-				8,
-				9,
-				10
+				6
 			]
 		}
 	],
@@ -148,11 +144,7 @@
 				3,
 				4,
 				5,
-				6,
-				7,
-				8,
-				9,
-				10
+				6
 			]
 		}
 	],
@@ -167,13 +159,13 @@
 		{
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
-			"path" : "src/player.cpp",
+			"path" : "src/Player.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
-			"path" : "src/player_state.cpp",
+			"path" : "src/Player_state.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -185,25 +177,7 @@
 		{
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
-			"path" : "src/LinkedList.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 5,
-			"compileGroupIndex" : 0,
-			"path" : "src/Coin.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 5,
-			"compileGroupIndex" : 0,
 			"path" : "src/io.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 5,
-			"compileGroupIndex" : 0,
-			"path" : "src/Ladder.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -216,12 +190,6 @@
 			"backtrace" : 5,
 			"compileGroupIndex" : 0,
 			"path" : "src/Map.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 5,
-			"compileGroupIndex" : 0,
-			"path" : "src/Rod.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

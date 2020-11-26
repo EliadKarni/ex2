@@ -2,7 +2,6 @@
 #include "Location.h"
 #include "Map.h"
 
-#define ENEMY_SYMB '%'
 
 class Enemy {
 public:

@@ -33,15 +33,15 @@ Controller::Controller() {
  * output: none.
 */
 void Controller::runGame() {
-	int	level = 1;
-	//TODO load map
+	m_map.LoadNewStage();
 	while (this->m_state.getLifeState() != 0){
-		while (this->m_coinsList.size() == 0) {
-			// TODO: check if game finished.
-			++level;
-			// TODO load next level
+		if (this->m_coinsList.size() == 0) {
+			//if(there is another level)
+				this->levelUp();
+			//else
+				//break
 		}
-		//TODO print stage!!!
+		this->printStage();
 		//-------------------------- play turns ------------------------------
 		this->m_player.PlayTurn(this->m_map);
 		if (this->playEnemyesTurn()) {
@@ -49,7 +49,7 @@ void Controller::runGame() {
 		}
 		//--------------------- check for coins collection -------------------
 		else
-			this->checkForCoinsCollect(level);
+			this->checkForCoinsCollect();
 	}
 }
 /*----------------------------------------------------------------------------
@@ -82,7 +82,7 @@ bool Controller::playEnemyesTurn() {
  * input: .
  * output:
 */
-void Controller::checkForCoinsCollect(const int &level) {
+void Controller::checkForCoinsCollect() {
 	for (int i = 0; i < this->m_coinsList.size(); ++i)
 		if (this->m_coinsList[i] == this->m_player.getLocation()) {
 			this->m_coinsList.erase(this->m_coinsList.begin() + i);
@@ -100,5 +100,60 @@ void Controller::playerDead() {
 	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
 	for (int i = 0; i < this->m_enemyList.size(); ++i)
 		this->m_enemyList[i] = Enemy(primeEnemysLoc[i]);
-	this
+	//this reset coins
+}
+/*----------------------------------------------------------------------------
+ * The method
+ * input: .
+ * output:
+*/
+void Controller::levelUp() {
+	vector<Enemy> newEnemyList;
+	this->m_state.levelup();
+	this->m_map.LoadNewStage();
+	//this->m_coinsList() = this->m_map. get initienal coins location
+
+	for(int i = 0; i < this->m_map.GetInitalsEnemyLocationsList().size(); ++i)
+	{
+		newEnemyList.push_back(
+			Enemy(this->m_map.GetInitalsEnemyLocationsList()[i]));
+	}
+	this->m_enemyList = newEnemyList;
+	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
+}
+/*----------------------------------------------------------------------------
+ * The method
+ * input: .
+ * output:
+*/
+void Controller::printStage() const {
+	vector<vector<char>> stage = this->m_map.getStageMap();
+	addMapParameters(stage);
+	system("cls");
+	for (int row = 0; row < this->m_map.getMapSize(); ++row) {
+		for (int col = 0; col < this->m_map.getMapSize(); ++col) 
+			std::cout << stage[row][col];
+		std::cout << std::endl;
+	}
+}
+/*----------------------------------------------------------------------------
+ * The method
+ * input: .
+ * output:
+*/
+void Controller::addMapParameters(vector<vector<char>> & stage) const{
+	if (stage[this->m_player.getLocation().row]
+		[this->m_player.getLocation().col] == LADDER)
+		stage[this->m_player.getLocation().row]
+		[this->m_player.getLocation().col] = ON_LADDER;
+	else
+		stage[this->m_player.getLocation().row]
+		[this->m_player.getLocation().col] = PLAYER;
+	for (int i = 0; i < this->m_coinsList.size(); ++i)
+		stage[this->m_coinsList[i].row]
+		[this->m_coinsList[i].col] = '*';
+	for (int i = 0; i < this->m_enemyList.size(); ++i)
+		stage[this->m_enemyList[i].getLocation().row]
+		[this->m_enemyList[i].getLocation().col] = ENEMY;
+
 }

@@ -19,9 +19,12 @@ public:
 	
 	void runGame();
 	void finishGame();
+	void levelUp();
 	bool playEnemyesTurn();
-	void checkForCoinsCollect(const int &level);
+	void checkForCoinsCollect();
 	void playerDead();
+	void printStage()const;
+	void addMapParameters(vector<vector<char>>& stage)const;
 private:
 	Map m_map;
 	vector<Location> m_coinsList;

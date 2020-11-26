@@ -26,4 +26,5 @@ void Enemy::setLocation(const Location& newlocation)
  * input: .
  * output:
 */
-void Enemy::playTurn(const Map& map, const Location& playerLocation) {}
+void Enemy::playTurn(const Map& map, const Location& playerLocation) {
+}

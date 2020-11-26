@@ -16,7 +16,7 @@ int main()
 {
 	//--------------------- parameters declareation --------------------------
 	Controller gameContraller = Controller();
-	//---------------------------------running games---------------------------------------
+	//-------------------------- running games -------------------------------
 	gameContraller.runGame();
 
 	return (EXIT_SUCCESS);
