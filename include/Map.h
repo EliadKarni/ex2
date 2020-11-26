@@ -14,7 +14,7 @@ using std::vector;
 #define LADDER 'H'
 #define ROD  '-'
 #define ON_LADDER 'S'
-
+#define COIN '*'
 #define PLAYER '@'
 #define ENEMY '%'
 //===============================================
