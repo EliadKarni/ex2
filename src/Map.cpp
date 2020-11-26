@@ -151,3 +151,10 @@ FUNCTION IN CONSRUCTION - NOT TO USE FOR NOW !!!
 Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
 
 }
+//========================================================================
+bool Map::isLevelsOver() {
+	if (this->FileReader.eof())
+		return true;
+
+	return false;
+}
