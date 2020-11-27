@@ -16,7 +16,7 @@ Map::Map()
 		exit (EXIT_FAILURE);
 	}
 	fileReader >> this->mapSize; //read the size of the map
-	fileReader.getc();        //break line
+	fileReader.get();        //break line
 	LoadNewStage();
 }
 //========================================================================
@@ -85,7 +85,7 @@ void Map::LoadNewStage()
 *         Move isn't Possible-> The original Location.
 */
 Location Map::isMovePossible(const Location& Objloc, int WantedMove )
-{
+const{
 	switch (WantedMove) {
 	case KB_UP: 
 		return UpMove(Objloc);
@@ -101,14 +101,14 @@ Location Map::isMovePossible(const Location& Objloc, int WantedMove )
 	}
 }
 //========================================================================
-Location Map::UpMove(const Location& Objloc) {
+Location Map::UpMove(const Location& Objloc) const{
 	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER)
 		return Location(Objloc.row - 1, Objloc.col);
 
 		return Objloc; //player can move up only on the ladder
 }
 //========================================================================
-Location Map::DownMove(const Location& Objloc) {
+Location Map::DownMove(const Location& Objloc) const{
 	if (stageMap[Objloc.row + 1][Objloc.col] == WALL) //player can't move to the wall
 		return Objloc; 
 
@@ -118,7 +118,7 @@ Location Map::DownMove(const Location& Objloc) {
 	return GetLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
-Location Map::RightMove(const Location& Objloc) {
+Location Map::RightMove(const Location& Objloc) const{
 	if (stageMap[Objloc.row][Objloc.col + 1] == WALL)
 		return Objloc;
 
@@ -129,7 +129,7 @@ Location Map::RightMove(const Location& Objloc) {
 	return Location(Objloc.row, Objloc.col + 1); //can move right
 }
 //========================================================================
-Location Map::LeftMove(const Location& Objloc) {
+Location Map::LeftMove(const Location& Objloc) const{
 	if (stageMap[Objloc.row][Objloc.col - 1] == WALL) //player can't move to the wall
 		return Objloc;
 
@@ -140,7 +140,7 @@ Location Map::LeftMove(const Location& Objloc) {
 	return Location(Objloc.row, Objloc.col - 1); //can move left
 }
 //========================================================================
-Location Map::GetLocationAfterFallDown(const Location& objloc) {
+Location Map::GetLocationAfterFallDown(const Location& objloc) const{
 	int row=objloc.row+1;
 	while (stageMap[row][objloc.col] == NOTHING) {
 		row++;
@@ -148,7 +148,7 @@ Location Map::GetLocationAfterFallDown(const Location& objloc) {
 	return Location(row,objloc.col);
 }
 //========================================================================
-Location Map::FoolEnemy(const Location& EnemyLoc) {
+Location Map::FoolEnemy(const Location& EnemyLoc) const{
 	srand(time(NULL));
 	int randMove = (rand() % 4) + 1; 
 	switch (randMove) {
@@ -160,14 +160,13 @@ Location Map::FoolEnemy(const Location& EnemyLoc) {
 		return Location(EnemyLoc.row, EnemyLoc.col + 1);
 	}
 	//move enemy down:
-	return Location(EnemyLoc.row+1,EnemyLoc.col)
+	return Location(EnemyLoc.row + 1, EnemyLoc.col);
 }
 //========================================================================
 /*
 FUNCTION IN CONSRUCTION - NOT TO USE FOR NOW !!!
 */
 Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
-
 }
 //========================================================================
 bool Map::isLevelsOver() {

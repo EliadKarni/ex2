@@ -29,3 +29,13 @@
 21	1032	628116838	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e
 9	1195	628116838	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
 4	752	628116971	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+12	457	628179981	CMakeFiles/ex2.dir/src/Location.cpp.obj	8b4ecfa0b906e654
+18	973	628179981	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e
+5	1105	628179981	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+9	1208	628179981	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
+4	799	628180566	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+11	825	628180566	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
+4	723	628180588	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+11	787	628180588	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
+1	792	628180699	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+11	828	628180699	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397

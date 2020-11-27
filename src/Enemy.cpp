@@ -27,4 +27,5 @@ void Enemy::setLocation(const Location& newlocation)
  * output:
 */
 void Enemy::playTurn(const Map& map, const Location& playerLocation) {
+	this->m_location = map.FoolEnemy();
 }

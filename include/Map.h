@@ -35,14 +35,14 @@ public:
 	vector<Location> GetInitalsEnemyLocationsList()  const;
 	
 	void LoadNewStage();
-	Location isMovePossible         (const Location&, int);
-	Location GetLocationAfterFallDown    (const Location&);
-	Location UpMove                      (const Location&);
-	Location DownMove                    (const Location&);
-	Location RightMove                   (const Location&);
-	Location LeftMove                    (const Location&);
-	Location FoolEnemy                   (const Location&);
-	Location SmartEnemy(const Location&, const Location& );
+	Location isMovePossible         (const Location&, int)const;
+	Location GetLocationAfterFallDown    (const Location&)const;
+	Location UpMove                      (const Location&)const;
+	Location DownMove                    (const Location&)const;
+	Location RightMove                   (const Location&)const;
+	Location LeftMove                    (const Location&)const;
+	Location FoolEnemy                   (const Location&)const;
+	Location SmartEnemy(const Location&, const Location& )const;
 	bool isLevelsOver();
 	char GetContent(const Location&) const;
 	bool MapException(const Location&);
