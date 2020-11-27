@@ -53,19 +53,20 @@ void Controller::runGame() {
 	}
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method print the game score.
+ * input: none.
+ * output: none.
 */
-void Controller::finishGame() {
+void Controller::printScore() {
 	std::cout << (this->m_state.getLifeState() == 0) ?
 		"you lost the game!\n" : "you won the game!\n";
 	std::cout << "your score is: " << this->m_state.getScoreState();
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is playing each enemy of the map turn and return if one of
+ * the enemys have cached the player.
+ * input: none.
+ * output: if one of the enemy where able to cach the player.
 */
 bool Controller::playEnemyesTurn() {
 	for (int i = 0; i < this->m_enemyList.size(); ++i) {
@@ -78,9 +79,10 @@ bool Controller::playEnemyesTurn() {
 	return false;
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is cheking if the player picked one of the game coins
+ * if he is, the method update the needed data.
+ * input: none.
+ * output: none.
 */
 void Controller::checkForCoinsCollect() {
 	for (int i = 0; i < this->m_coinsList.size(); ++i)
@@ -90,9 +92,9 @@ void Controller::checkForCoinsCollect() {
 		}
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method update the needed data in the player deth occation
+ * input: none.
+ * output: none.
 */
 void Controller::playerDead() {
 	vector<Location> primeEnemysLoc = 
@@ -103,9 +105,9 @@ void Controller::playerDead() {
 	//this reset coins
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is update the needed data in an level up occation.
+ * input: none.
+ * output: none.
 */
 void Controller::levelUp() {
 	vector<Enemy> newEnemyList;
@@ -122,9 +124,9 @@ void Controller::levelUp() {
 	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is printing the current stage.
+ * input: none.
+ * output: none.
 */
 void Controller::printStage() const {
 	vector<vector<char>> stage = this->m_map.getStageMap();
@@ -137,9 +139,9 @@ void Controller::printStage() const {
 	}
 }
 /*----------------------------------------------------------------------------
- * The method
- * input: .
- * output:
+ * The method is adding the received map the dynamic parameters.
+ * input: stage's vector.
+ * output: none.
 */
 void Controller::addMapParameters(vector<vector<char>> & stage) const{
 	if (stage[this->m_player.getLocation().row]
@@ -155,5 +157,4 @@ void Controller::addMapParameters(vector<vector<char>> & stage) const{
 	for (int i = 0; i < this->m_enemyList.size(); ++i)
 		stage[this->m_enemyList[i].getLocation().row]
 		[this->m_enemyList[i].getLocation().col] = ENEMY;
-
 }

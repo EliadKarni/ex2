@@ -15,10 +15,13 @@ using std::fstream;
 
 class Controller {
 public:
+	//------------------------- constractors section -------------------------
+
 	Controller();
-	
+	//------------------------- method section -------------------------------
+
 	void runGame();
-	void finishGame();
+	void printScore();
 	void levelUp();
 	bool playEnemyesTurn();
 	void checkForCoinsCollect();

@@ -5,10 +5,14 @@
 
 class Enemy {
 public:
+	//------------------------- constractors section -------------------------
+
 	Enemy(Location location = Location(0, 0)) : m_location(location) {}
+	//-------------------------- gets section --------------------------------
 
 	Location getLocation()const;
-	void setLocation(const Location& newlocation);
+	//------------------------- method section -------------------------------
+
 	void playTurn(const Map &map, const Location &playerLocation);
 private:
 	Location m_location;

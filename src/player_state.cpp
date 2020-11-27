@@ -26,7 +26,7 @@ unsigned int PlayerState::getLifeState() const { return(this->m_life);}
 */
 unsigned int PlayerState::getScoreState() const { return(this->m_score);}
 /*----------------------------------------------------------------------------
- * The get method returns the PlayerState score state.
+ * The get method returns the PlayerState level state.
  * input: none.
  * output: players score.
 */
@@ -42,7 +42,7 @@ void PlayerState::die() {
 		--this->m_life;
 }
 /*----------------------------------------------------------------------------
- * The method is updating the player score by coin collecting by the
+ * The method is updating the player's score in coin colecing occation by the
  * demanded roles.
  * input: none.
  * output: none.
@@ -51,8 +51,8 @@ void PlayerState::collectCoin() {
 	this->m_score += this->m_level * COIN_SCORE;
 }
 /*----------------------------------------------------------------------------
- * The method is updating the player score by the level up demanded roles
- * and update the level argument.
+ * The method is updating the player score in level up occation by the 
+ * demanded roles and update the level argument.
  * input: none.
  * output: none.
 */
