@@ -10,20 +10,20 @@ using std::ifstream;
 //========================================================================
 Map::Map()
 {
-	FileReader.open("Board.txt");
-	if (!FileReader.is_open()) {
+	fileReader.open("Board.txt");
+	if (!fileReader.is_open()) {
 		std::cerr << "Game loading failed !  Make sure all files exist !";
 		exit (EXIT_FAILURE);
 	}
-	fileReader >> this->MapSize; //read the size of the map
+	fileReader >> this->mapSize; //read the size of the map
 	fileReader.getc();        //break line
 	LoadNewStage();
 }
 //========================================================================
-vector<vector<char>> Map::getStageMap()              const { return StageMap; }
-int    Map::getMapSize()                             const { return MapSize;  }
-Location Map::GetInitialPlayerLocation()             const { return InitialPlayerLocation; }
-vector<Location> Map::GetInitalsEnemyLocationsList() const { return InitalsEnemyLocationsList; }
+vector<vector<char>> Map::getStageMap()              const { return stageMap; }
+int    Map::getMapSize()                             const { return mapSize;  }
+Location Map::GetInitialPlayerLocation()             const { return initialPlayerLocation; }
+vector<Location> Map::GetInitalsEnemyLocationsList() const { return initalsEnemyLocationsList; }
 //========================================================================
 /*
 * This function get a file reader from the Game Controller,
@@ -34,20 +34,20 @@ void Map::LoadNewStage()
 	char c;
 	int row;
 	bool player_exist=false;
-	FileReader >> this->MapSize; //read the size of the map
-	FileReader >> c;        //break line
-	for (row = 0; row < MapSize; row++)
+	fileReader >> this->mapSize; //read the size of the map
+	fileReader >> c;        //break line
+	for (row = 0; row < mapSize; row++)
 	{
-		FileReader >> c;
+		fileReader >> c;
 		if(c!=PLAYER && c!=ENEMY && c!=ON_LADDER)
-		StageMap[row].push_back(c);
+		stageMap[row].push_back(c);
 		//save initial locations of diff objs:
 		else {
-			StageMap[row].push_back(' ');
+			stageMap[row].push_back(' ');
 			switch (c) {
 			case PLAYER: {
 				if (!player_exist) {
-					this->InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					this->initialPlayerLocation = Location(row, stageMap[row].size() - 1);
 					player_exist = true;
 					break;
 				}
@@ -57,13 +57,13 @@ void Map::LoadNewStage()
 				}
 			}
 			case ENEMY: {
-				Location EnemyLocation(row, StageMap[row].size() - 1);
-				InitalsEnemyLocationsList.push_back(EnemyLocation);
+				Location EnemyLocation(row, stageMap[row].size() - 1);
+				initalsEnemyLocationsList.push_back(EnemyLocation);
 				break;
 			}
 			case ON_LADDER: {
 				if (!player_exist) {
-					InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					initialPlayerLocation = Location(row, stageMap[row].size() - 1);
 					player_exist = true;
 					break;
 				}
@@ -74,9 +74,9 @@ void Map::LoadNewStage()
 			}
 			}
 		}
-		FileReader >> c; //break line
+		fileReader >> c; //break line
 	}
-	FileReader >> c; //ready to read the next stage
+	fileReader >> c; //ready to read the next stage
 }
 //========================================================================
 /*
@@ -102,39 +102,39 @@ Location Map::isMovePossible(const Location& Objloc, int WantedMove )
 }
 //========================================================================
 Location Map::UpMove(const Location& Objloc) {
-	if (StageMap[Objloc.row][Objloc.col] == ON_LADDER)
+	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER)
 		return Location(Objloc.row - 1, Objloc.col);
 
 		return Objloc; //player can move up only on the ladder
 }
 //========================================================================
 Location Map::DownMove(const Location& Objloc) {
-	if (StageMap[Objloc.row + 1][Objloc.col] == WALL) //player can't move to the wall
+	if (stageMap[Objloc.row + 1][Objloc.col] == WALL) //player can't move to the wall
 		return Objloc; 
 
-	if (StageMap[Objloc.row + 1][Objloc.col] == LADDER)
+	if (stageMap[Objloc.row + 1][Objloc.col] == LADDER)
 		return Location(Objloc.row+1,Objloc.col);     //player move down on ladder
 
 	return GetLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
 Location Map::RightMove(const Location& Objloc) {
-	if (StageMap[Objloc.row][Objloc.col + 1] == WALL)
+	if (stageMap[Objloc.row][Objloc.col + 1] == WALL)
 		return Objloc;
 
-	if (StageMap[Objloc.row][Objloc.col] == ON_LADDER &&
-		StageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
+	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER &&
+		stageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col + 1); //can move right
 }
 //========================================================================
 Location Map::LeftMove(const Location& Objloc) {
-	if (StageMap[Objloc.row][Objloc.col - 1] == WALL) //player can't move to the wall
+	if (stageMap[Objloc.row][Objloc.col - 1] == WALL) //player can't move to the wall
 		return Objloc;
 
-	if (StageMap[Objloc.row][Objloc.col] == 'S' &&
-		StageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
+	if (stageMap[Objloc.row][Objloc.col] == 'S' &&
+		stageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col - 1); //can move left
@@ -142,7 +142,7 @@ Location Map::LeftMove(const Location& Objloc) {
 //========================================================================
 Location Map::GetLocationAfterFallDown(const Location& objloc) {
 	int row=objloc.row+1;
-	while (StageMap[row][objloc.col] == NOTHING) {
+	while (stageMap[row][objloc.col] == NOTHING) {
 		row++;
 	}
 	return Location(row,objloc.col);
@@ -171,7 +171,7 @@ Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
 }
 //========================================================================
 bool Map::isLevelsOver() {
-	if (this->FileReader.eof())
+	if (this->fileReader.eof())
 		return true;
 
 	return false;
@@ -179,11 +179,11 @@ bool Map::isLevelsOver() {
 //========================================================================
 char Map::GetContent(const Location& loc) const
 {
-	return StageMap[loc.row][loc.col];
+	return stageMap[loc.row][loc.col];
 }
 //========================================================================
 bool Map::MapException(const Location& loc) {
-	if (StageMap[loc.row][loc.col] == WALL || loc.row == 0 || loc.col == 0)
+	if (stageMap[loc.row][loc.col] == WALL || loc.row == 0 || loc.col == 0)
 		return true;
 
 	return false;

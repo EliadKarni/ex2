@@ -20,11 +20,11 @@ using std::vector;
 //===============================================
 class Map {
 private:
-	vector<vector<char>> StageMap;
-	int MapSize;
-	Location InitialPlayerLocation;
-	vector<Location> InitalsEnemyLocationsList;
-	ifstream FileReader;
+	vector<vector<char>> stageMap;
+	int mapSize;
+	Location initialPlayerLocation;
+	vector<Location> initalsEnemyLocationsList;
+	ifstream fileReader;
 	
 public:
 	Map();
