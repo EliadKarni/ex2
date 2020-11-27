@@ -3,7 +3,6 @@
 #include "Location.h"
 #include "io.h"
 #include <ostream>
-#include <string>
 #include <vector>
 #include <time.h>
 using std::ifstream;
@@ -34,23 +33,50 @@ void Map::LoadNewStage()
 {
 	char c;
 	int row;
+	bool player_exist=false;
+	FileReader >> this->MapSize; //read the size of the map
+	FileReader >> c;        //break line
 	for (row = 0; row < MapSize; row++)
 	{
-		fileReader >> c;
+		FileReader >> c;
+		if(c!=PLAYER && c!=ENEMY && c!=ON_LADDER)
 		StageMap[row].push_back(c);
 		//save initial locations of diff objs:
-		switch (c) {
-		case PLAYER: {
-			InitialPlayerLocation(row, StageMap[row].size() - 1);
+		else {
+			StageMap[row].push_back(' ');
+			switch (c) {
+			case PLAYER: {
+				if (!player_exist) {
+					this->InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					player_exist = true;
+					break;
+				}
+				else {
+					std::cout << "make sure there is one player on the map!";
+					EXIT_FAILURE;
+				}
+			}
+			case ENEMY: {
+				Location EnemyLocation(row, StageMap[row].size() - 1);
+				InitalsEnemyLocationsList.push_back(EnemyLocation);
+				break;
+			}
+			case ON_LADDER: {
+				if (!player_exist) {
+					InitialPlayerLocation = Location(row, StageMap[row].size() - 1);
+					player_exist = true;
+					break;
+				}
+				else {
+					std::cout << "make sure there is one player on the map!";
+					EXIT_FAILURE;
+				}
+			}
+			}
 		}
-		case ENEMY: {
-			Location EnemyLocation(row, StageMap[row].size() - 1);
-			InitalsEnemyLocations.push_back(EnemyLocation);
-		}
-		fileReader >> c; 
-	    }
-    }
-	fileReader >> c; //ready to read the next map
+		FileReader >> c; //break line
+	}
+	FileReader >> c; //ready to read the next stage
 }
 //========================================================================
 /*
@@ -142,4 +168,23 @@ FUNCTION IN CONSRUCTION - NOT TO USE FOR NOW !!!
 */
 Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
 
+}
+//========================================================================
+bool Map::isLevelsOver() {
+	if (this->FileReader.eof())
+		return true;
+
+	return false;
+}
+//========================================================================
+char Map::GetContent(const Location& loc) const
+{
+	return StageMap[loc.row][loc.col];
+}
+//========================================================================
+bool Map::MapException(const Location& loc) {
+	if (StageMap[loc.row][loc.col] == WALL || loc.row == 0 || loc.col == 0)
+		return true;
+
+	return false;
 }

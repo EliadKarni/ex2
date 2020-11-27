@@ -14,7 +14,7 @@ using std::vector;
 #define LADDER 'H'
 #define ROD  '-'
 #define ON_LADDER 'S'
-
+#define COIN '*'
 #define PLAYER '@'
 #define ENEMY '%'
 //===============================================
@@ -43,4 +43,7 @@ public:
 	Location LeftMove                    (const Location&);
 	Location FoolEnemy                   (const Location&);
 	Location SmartEnemy(const Location&, const Location& );
+	bool isLevelsOver();
+	char GetContent(const Location&) const;
+	bool MapException(const Location&);
 };
