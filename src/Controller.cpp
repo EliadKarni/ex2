@@ -1,17 +1,17 @@
 /* Controller
  * ===========================================================================
- *
  */
- //---------------------------- include section -------------------------------
+//---------------------------- include section -------------------------------
 #include <iostream>
-#include <fstream>
 #include <stdlib.h>
 #include <vector>
 #include "Controller.h"
 #include "Enemy.h"
+#include "BoardReader.h"
+#include "Map.h"
 #include "io.h"
 
-using std::fstream;
+//------------------------------ using section -------------------------------
 using std::vector;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------

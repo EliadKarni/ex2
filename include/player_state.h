@@ -4,9 +4,10 @@
 #define COIN_SCORE 2
 #define LEVEL_UP_SCORE 50
 
-/*PlayerState
- The class is follow the player state throue the game and updete its:
- score, life counter and its level.
+/*----------------------------------------------------------------------------
+ * PlayerState
+ *The class is follow the player state throue the game and updete its:
+ *score, life counter and its level.
 */
 class PlayerState {
 public:

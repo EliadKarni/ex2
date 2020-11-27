@@ -1,8 +1,12 @@
 #pragma once
+//---------------------------- include section -------------------------------
 #include "Location.h"
 #include "Map.h"
 
-
+/*----------------------------------------------------------------------------
+ * Enemy
+ * The class is an a enemy at the game.
+*/
 class Enemy {
 public:
 	//------------------------- constractors section -------------------------

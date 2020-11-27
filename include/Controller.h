@@ -1,6 +1,5 @@
 #pragma once
-
-#define BOARD_PATH "\levels\level.txt"
+//---------------------------- include section -------------------------------
 #include <string.h>
 #include <fstream>
 #include <vector>
@@ -9,10 +8,16 @@
 #include "player_state.h"
 #include "Map.h"
 
+//------------------------------ using section -------------------------------
 using std::vector;
 using std::string;
 using std::fstream;
 
+/*----------------------------------------------------------------------------
+ * Controller
+ * The class is managing an a game by the demanded rols and active each of
+ * the game's object by the needed order.
+*/
 class Controller {
 public:
 	//------------------------- constractors section -------------------------

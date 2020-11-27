@@ -99,6 +99,14 @@ build CMakeFiles\ex2.dir\src\Map.cpp.obj: CXX_COMPILER__ex2_Debug ..\..\..\src\M
   TARGET_COMPILE_PDB = CMakeFiles\ex2.dir\
   TARGET_PDB = ex2.pdb
 
+build CMakeFiles\ex2.dir\src\BoardReader.cpp.obj: CXX_COMPILER__ex2_Debug ..\..\..\src\BoardReader.cpp || cmake_object_order_depends_target_ex2_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd   /W4 /permissive- /Zc:externConstexpr /Zc:inline -std:c++17
+  INCLUDES = -I..\..\..\include
+  OBJECT_DIR = CMakeFiles\ex2.dir
+  OBJECT_FILE_DIR = CMakeFiles\ex2.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\ex2.dir\
+  TARGET_PDB = ex2.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ex2
@@ -107,7 +115,7 @@ build CMakeFiles\ex2.dir\src\Map.cpp.obj: CXX_COMPILER__ex2_Debug ..\..\..\src\M
 #############################################
 # Link the executable ex2.exe
 
-build ex2.exe: CXX_EXECUTABLE_LINKER__ex2_Debug CMakeFiles\ex2.dir\src\main.cpp.obj CMakeFiles\ex2.dir\src\Player.cpp.obj CMakeFiles\ex2.dir\src\Player_state.cpp.obj CMakeFiles\ex2.dir\src\Controller.cpp.obj CMakeFiles\ex2.dir\src\io.cpp.obj CMakeFiles\ex2.dir\src\Location.cpp.obj CMakeFiles\ex2.dir\src\Map.cpp.obj
+build ex2.exe: CXX_EXECUTABLE_LINKER__ex2_Debug CMakeFiles\ex2.dir\src\main.cpp.obj CMakeFiles\ex2.dir\src\Player.cpp.obj CMakeFiles\ex2.dir\src\Player_state.cpp.obj CMakeFiles\ex2.dir\src\Controller.cpp.obj CMakeFiles\ex2.dir\src\io.cpp.obj CMakeFiles\ex2.dir\src\Location.cpp.obj CMakeFiles\ex2.dir\src\Map.cpp.obj CMakeFiles\ex2.dir\src\BoardReader.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

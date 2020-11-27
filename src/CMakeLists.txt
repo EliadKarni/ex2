@@ -4,4 +4,5 @@
 							"Controller.cpp"
 							"io.cpp"
 							"Location.cpp"
-							"Map.cpp")
+							"Map.cpp"
+							"BoardReader.cpp")
