@@ -109,32 +109,32 @@ Location Map::UpMove(const Location& Objloc) const{
 }
 //========================================================================
 Location Map::DownMove(const Location& Objloc) const{
-	if (stageMap[Objloc.row + 1][Objloc.col] == WALL) //player can't move to the wall
+	if (MapException(Location(Objloc.row+1, Objloc.col))) //player can't move to the wall
 		return Objloc; 
 
-	if (stageMap[Objloc.row + 1][Objloc.col] == LADDER)
+	if (StageMap[Objloc.row + 1][Objloc.col] == LADDER)
 		return Location(Objloc.row+1,Objloc.col);     //player move down on ladder
 
 	return GetLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
 Location Map::RightMove(const Location& Objloc) const{
-	if (stageMap[Objloc.row][Objloc.col + 1] == WALL)
+	if (MapException(Location(Objloc.row, Objloc.col + 1))) //player can't move to the wall
 		return Objloc;
 
-	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER &&
-		stageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
+	if (StageMap[Objloc.row][Objloc.col] == ON_LADDER &&
+		StageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col + 1); //can move right
 }
 //========================================================================
 Location Map::LeftMove(const Location& Objloc) const{
-	if (stageMap[Objloc.row][Objloc.col - 1] == WALL) //player can't move to the wall
+	if (MapException(Location(Objloc.row, Objloc.col - 1))) //player can't move to the wall
 		return Objloc;
 
-	if (stageMap[Objloc.row][Objloc.col] == 'S' &&
-		stageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
+	if (StageMap[Objloc.row][Objloc.col] == 'S' &&
+		StageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col - 1); //can move left
