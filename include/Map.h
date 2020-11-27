@@ -19,21 +19,23 @@ using std::vector;
 //===============================================
 class Map {
 private:
-	vector<vector<char>> stageMap;
-	int mapSize;
-	Location initialPlayerLocation;
-	vector<Location> initalsEnemyLocationsList;
-	ifstream fileReader;
+	vector<vector<char>> m_stageMap;
+	int m_mapSize;
+	Location m_initialPlayerLoc;
+	vector<Location> m_initialCoinsLoc;
+	vector<Location> m_initialEnemiesLoc;
 	
 public:
-	Map();
+	Map(vector<vector<char>> stage = {},
+		Location m_initialPlayerLoc = Location(),
+		vector<Location> m_initialCoinsLoc = {},
+		vector<Location> m_initialEnemiesLoc = {});
+
+	Location GetInitialPlayerLocation()					const;
+	vector<Location> GetInitalsEnemyLocationsList()		const;
+	vector<vector<char>> getStageMap()					const;
+	int getMapSize()									const;
 	
-	vector<vector<char>> getStageMap()               const;
-	int getMapSize()                                 const;
-	Location GetInitialPlayerLocation()              const;
-	vector<Location> GetInitalsEnemyLocationsList()  const;
-	
-	void LoadNewStage();
 	Location isMovePossible         (const Location&, int)const;
 	Location GetLocationAfterFallDown    (const Location&)const;
 	Location UpMove                      (const Location&)const;
@@ -42,7 +44,6 @@ public:
 	Location LeftMove                    (const Location&)const;
 	Location FoolEnemy                   (const Location&)const;
 	Location SmartEnemy(const Location&, const Location& )const;
-	bool isLevelsOver();
 	char GetContent(const Location&) const;
 	bool MapException(const Location&);
 };

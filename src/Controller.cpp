@@ -98,12 +98,16 @@ void Controller::checkForCoinsCollect() {
  * output: none.
 */
 void Controller::playerDead() {
-	vector<Location> primeEnemysLoc = 
-		this->m_map.GetInitalsEnemyLocationsList();
-	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
-	for (int i = 0; i < this->m_enemyList.size(); ++i)
-		this->m_enemyList[i] = Enemy(primeEnemysLoc[i]);
-	//this reset coins
+	this->m_state.die();
+	if (this->m_state.getLifeState() > 0) {
+		// coins get this->m_coinsList = this->m_map.
+		this->m_enemyList = {};
+		for(int i = 0; i < this->m_map.GetInitalsEnemyLocationsList().size()
+			; ++i)
+			this->m_enemyList.push_back(
+				Enemy(this->m_map.GetInitalsEnemyLocationsList()[i]));
+		this->m_player = this->m_map.GetInitialPlayerLocation();
+	}
 }
 /*----------------------------------------------------------------------------
  * The method is update the needed data in an level up occation.

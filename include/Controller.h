@@ -9,11 +9,6 @@
 #include "Map.h"
 #include "BoardReader.h"
 
-//------------------------------ using section -------------------------------
-using std::vector;
-using std::string;
-using std::fstream;
-
 /*----------------------------------------------------------------------------
  * Controller
  * The class is managing an a game by the demanded rols and active each of

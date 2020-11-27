@@ -16,7 +16,7 @@
  * output: .
 */
 BoardReader::BoardReader() {
-	this->m_boardReader.open("asd");
+	this->m_boardReader.open(BOARD_PATH);
 	if (!(this->m_boardReader.is_open()))
 		terminate("opening boards files error!");
 	int primeLoc = (int)this->m_boardReader.tellg();
@@ -38,10 +38,10 @@ bool BoardReader::thereIsNextLevel() {
  * input: .
  * output: .
 */
-vector<vector<char>> BoardReader::readNextLevel() {
+Map BoardReader::readNextLevel() {
 	vector<vector<char>> map;
 	bool playerReceived = false;
-	string receivedline;
+	std::string receivedline;
 	char receivedChar;
 	int size = receiveMapSize();
 
