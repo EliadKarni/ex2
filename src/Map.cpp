@@ -39,7 +39,7 @@ void Map::LoadNewStage()
 	for (row = 0; row < mapSize; row++)
 	{
 		fileReader >> c;
-		if(c!=PLAYER && c!=ENEMY && c!=ON_LADDER)
+		if(c!=PLAYER && c!=ENEMY && c!=PLAYER_CLIME)
 		stageMap[row].push_back(c);
 		//save initial locations of diff objs:
 		else {
@@ -61,7 +61,7 @@ void Map::LoadNewStage()
 				initalsEnemyLocationsList.push_back(EnemyLocation);
 				break;
 			}
-			case ON_LADDER: {
+			case PLAYER_CLIME: {
 				if (!player_exist) {
 					initialPlayerLocation = Location(row, stageMap[row].size() - 1);
 					player_exist = true;
@@ -102,7 +102,7 @@ const{
 }
 //========================================================================
 Location Map::UpMove(const Location& Objloc) const{
-	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER)
+	if (stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME)
 		return Location(Objloc.row - 1, Objloc.col);
 
 		return Objloc; //player can move up only on the ladder
@@ -122,7 +122,7 @@ Location Map::RightMove(const Location& Objloc) const{
 	if (stageMap[Objloc.row][Objloc.col + 1] == WALL)
 		return Objloc;
 
-	if (stageMap[Objloc.row][Objloc.col] == ON_LADDER &&
+	if (stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME &&
 		stageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
 		return Objloc;
 

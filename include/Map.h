@@ -10,10 +10,9 @@ using std::vector;
 //===============================================
 #define NOTHING ' '
 #define WALL '#'
-#define FLOOR '#'
 #define LADDER 'H'
 #define ROD  '-'
-#define ON_LADDER 'S'
+#define PLAYER_CLIME 'S'
 #define COIN '*'
 #define PLAYER '@'
 #define ENEMY '%'

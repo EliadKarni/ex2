@@ -5,4 +5,6 @@
 							"io.cpp"
 							"Location.cpp"
 							"Map.cpp"
-							"BoardReader.cpp")
+							"BoardReader.cpp"
+							"Utilities.cpp"
+							)

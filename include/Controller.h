@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "player_state.h"
 #include "Map.h"
+#include "BoardReader.h"
 
 //------------------------------ using section -------------------------------
 using std::vector;
@@ -22,7 +23,9 @@ class Controller {
 public:
 	//------------------------- constractors section -------------------------
 
-	Controller();
+	Controller() :m_boardReader(BoardReader()), m_coinsList({}),
+		m_enemyList({}), m_map(Map()), m_player(Player(Location())),
+		m_state(PlayerState()){};
 	//------------------------- method section -------------------------------
 
 	void runGame();
@@ -39,5 +42,5 @@ private:
 	vector<Enemy> m_enemyList;
 	Player m_player;
 	PlayerState m_state;
-	ifstream boardReader;
+	BoardReader m_boardReader;
 };

@@ -24,6 +24,7 @@ Controller::Controller() {
 	this->m_coinsList = {};
 	this->m_enemyList = {};
 	this->m_player = Player();
+	this->m_boardReader = BoardReader();
 }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
@@ -33,13 +34,13 @@ Controller::Controller() {
  * output: none.
 */
 void Controller::runGame() {
-	m_map.LoadNewStage();
+	this->levelUp();
 	while (this->m_state.getLifeState() != 0){
 		if (this->m_coinsList.size() == 0) {
-			//if(there is another level)
+			if (this->m_boardReader.thereIsNextLevel())
 				this->levelUp();
-			//else
-				//break
+			else
+				break;
 		}
 		this->printStage();
 		//-------------------------- play turns ------------------------------
@@ -110,18 +111,18 @@ void Controller::playerDead() {
  * output: none.
 */
 void Controller::levelUp() {
-	vector<Enemy> newEnemyList;
-	this->m_state.levelup();
-	this->m_map.LoadNewStage();
-	//this->m_coinsList() = this->m_map. get initienal coins location
+	//updating map
+	this->m_enemyList = {};
+	this->m_coinsList = {};
 
-	for(int i = 0; i < this->m_map.GetInitalsEnemyLocationsList().size(); ++i)
-	{
-		newEnemyList.push_back(
-			Enemy(this->m_map.GetInitalsEnemyLocationsList()[i]));
+	this->m_state.levelup();
+	this->m_coinsList = this->m_boardReader.getPrimeCoins();
+
+	for(int i = 0; i < this->m_boardReader.getPrimeEnemy().size(); ++i){
+		this->m_enemyList.push_back
+		(Enemy(this->m_boardReader.getPrimeEnemy()[i]));
 	}
-	this->m_enemyList = newEnemyList;
-	this->m_player = Player(this->m_map.GetInitialPlayerLocation());
+	this->m_player = Player(this->m_boardReader.getPrimePlayer());
 }
 /*----------------------------------------------------------------------------
  * The method is printing the current stage.
@@ -147,7 +148,7 @@ void Controller::addMapParameters(vector<vector<char>> & stage) const{
 	if (stage[this->m_player.getLocation().row]
 		[this->m_player.getLocation().col] == LADDER)
 		stage[this->m_player.getLocation().row]
-		[this->m_player.getLocation().col] = ON_LADDER;
+		[this->m_player.getLocation().col] = PLAYER_CLIME;
 	else
 		stage[this->m_player.getLocation().row]
 		[this->m_player.getLocation().col] = PLAYER;
