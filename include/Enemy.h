@@ -13,7 +13,7 @@ class Enemy {
 public:
 	//------------------------- constractors section -------------------------
 
-	Enemy(Location location = Location(0, 0)) : m_location(location) {}
+	Enemy(const Location &location = Location(0, 0));
 	//-------------------------- gets section --------------------------------
 
 	Location getLocation()const;

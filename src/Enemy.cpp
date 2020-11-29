@@ -7,17 +7,26 @@
 #include "Map.h"
 #include "Location.h"
 #include "Utilities.h"
+
+//-------------------------- constractors section ----------------------------
+/*----------------------------------------------------------------------------
+ * The constractor is defining Enemys location by the received location.
+ * The constractor is the default constractor.
+ * input: Enemye's wanted location.
+ * output: none.
+*/
+Enemy::Enemy(const Location& location) : m_location(location) {}
 //------------------------------ gets section --------------------------------
 /*----------------------------------------------------------------------------
- * The get get method return the enemy's location on the map.
+ * The get method return the enemy's location on the map.
  * input: none.
  * output: enemy's location on the map.
 */
 Location Enemy::getLocation()const { return this->m_location; }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
- * The method is update the enemy's location by the played turn.
- * input: The level map object, the player location on the map.
+ * The method calculate the enemyes move and update it on the screen.
+ * input: the stage map and the player's location.
  * output: none.
 */
 void Enemy::playTurn(const Map& map, const Location& playerLocation) {

@@ -13,12 +13,19 @@
 */
 class BoardReader {
 public:
+	//------------------------- constractors section -------------------------
 	BoardReader();
+
+	//------------------------- method section -------------------------------
 
 	bool thereIsNextLevel(); // not const because tellg() isn't const.
 	Map readNextLevel();
 private:
+	//--------------------- privete methods section --------------------------
+	
 	int receiveMapSize();
+
+	//------------------------ members section -------------------------------
 
 	ifstream m_boardReader;
 };
