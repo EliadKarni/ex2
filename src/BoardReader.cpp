@@ -11,9 +11,8 @@
 
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
- * The constractor is .
- * input: .
- * output: .
+ * The constractor is open the levels file and then the file reader
+ * is waiting to load the first stage.
 */
 BoardReader::BoardReader() {
 	this->m_boardReader.open(BOARD_PATH);
@@ -22,17 +21,17 @@ BoardReader::BoardReader() {
 }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
- * The method .
- * input: .
- * output: .
+ * The method check if there is a new level to load
+ * input: None.
+ * output: true if there is new level and false if doesn't.
 */
 bool BoardReader::thereIsNextLevel() {
 	return (isdigit(this->m_boardReader.peek()));
 }
 /*----------------------------------------------------------------------------
- * The method .
- * input: .
- * output: .
+ * The method read a new level from the file into a 2D vector
+ * input: None.
+ * output: the new level as a map object.
 */
 Map BoardReader::readNextLevel() {
 	vector<vector<char>> map;
@@ -101,9 +100,10 @@ Map BoardReader::readNextLevel() {
 	return Map(map, playerLoc, coinsLocs, enemysLocs);
 }
 /*----------------------------------------------------------------------------
- * The method .
- * input: .
- * output: .
+ * The method check if the input size are a digits and what is the
+ * size of the map.
+ * input: None
+ * output: the size as an integer number.
 */
 int BoardReader::receiveMapSize() {
 	unsigned int size = 0;

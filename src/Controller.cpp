@@ -14,7 +14,8 @@
 
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
- * The constractor is building  the object using array of 3 received Vertexes.
+ * The constractor is building the Controller by initialize every member
+ * in his correct constructor.
  * input: The constractor is the default constractor.
  * output: none.
 */
