@@ -70,8 +70,13 @@ void Controller::printScore() {
 */
 bool Controller::playEnemyesTurn() {
 	for (int i = 0; i < this->m_enemyList.size(); ++i) {
+		if (this->m_enemyList[i].getLocation() ==
+		    this->m_player.getLocation())
+			return true;
+		
 		this->m_enemyList[i].playTurn(this->m_map,
 			this->m_player.getLocation());
+		
 		if (this->m_enemyList[i].getLocation()
 			== this->m_player.getLocation())
 			return true;
