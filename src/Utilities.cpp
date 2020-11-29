@@ -1,15 +1,25 @@
+
+//This is a general functions that help us to execute the game.
+
+
 #include <stdlib.h>
 #include <iostream>
 #include "Utilities.h"
 #include "io.h"
 #include "Map.h"
 #include "Location.h"
-
+//========================================================================
+/* input: string
+ * output: print the error messege it got and exit from the program(-1)
+*/
 void terminate(const std::string &errorMessage) {
 	std::cerr << errorMessage << std::endl;
 	exit(EXIT_FAILURE);
 }
-
+//========================================================================
+/* input: None.
+ * output: The integer value of the key received by the user.
+*/
 int receiveKey() {
     for (auto exit = false; !exit; ) {
         auto c = Keyboard::getch();
@@ -26,7 +36,10 @@ int receiveKey() {
     }
     return 0;
 }
-
+//========================================================================
+/* input: Key inputed by the user
+ * output: print a messege that tell to the user about wrong key he inputed
+*/
 int handleRegularKey(int c)
 {
     switch (c)
@@ -40,7 +53,10 @@ int handleRegularKey(int c)
 
     return c;
 }
-
+//========================================================================
+/* input: None.
+ * output: The integer value of the key received by the user.
+*/
 int handleSpecialKey()
 {
     auto c = Keyboard::getch();
@@ -60,7 +76,10 @@ int handleSpecialKey()
     }
     return 0;
 }
-
+//========================================================================
+/* input: 
+ * output:
+*/
 void moveObject(const Map& map, const Location& init, const Location& dest, char symbol) {
     if (map.mapException(init) && map.mapException(dest)) {
         Screen::setLocation(init);
