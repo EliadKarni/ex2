@@ -1,3 +1,5 @@
+//all these functions help us to calculate locations in the map.
+
 #include "Location.h"
 
 //========================================================================
