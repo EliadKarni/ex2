@@ -64,7 +64,6 @@ Map BoardReader::readNextLevel() {
 				playerReceived = true;
 				playerLoc = Location(i, j);
 				receivedMapRow.push_back(LADDER);
-				receivedMapRow.push_back(NOTHING);
 				break;
 			case ENEMY:
 				enemysLocs.push_back(Location(i, j));
