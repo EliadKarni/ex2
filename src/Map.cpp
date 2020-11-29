@@ -8,7 +8,7 @@ using std::ifstream;
 //========================================================================
 Map::Map(vector<vector<char>> stage, Location initialPlayerLoc,
 	vector<Location> initialCoinsLoc, vector<Location> initialEnemiesLoc) :
-	m_stageMap(stage), m_mapSize(stage.size()),
+	m_stageMap(stage), m_mapSize((int)stage.size()),
 	m_initialPlayerLoc(initialPlayerLoc), m_initialCoinsLoc(initialCoinsLoc),
 	m_initialEnemiesLoc(initialEnemiesLoc) {}
 
@@ -46,42 +46,52 @@ const{
 	}
 }
 //========================================================================
-Location Map::upMove(const Location& Objloc) const{
-	if (m_stageMap[Objloc.row][Objloc.col] == LADDER)
-		return Location(Objloc.row - 1, Objloc.col);
+Location Map::upMove(const Location& ObjLoc) const{
+	if (mapException(Location(ObjLoc.row - 1, ObjLoc.col)) && 
+		getContent(Location(ObjLoc.row, ObjLoc.col)) == LADDER)
+			return Location(ObjLoc.row - 1, ObjLoc.col);
 
-		return Location(Objloc.row - 1, Objloc.col); //player can move up only on the ladder
+	return ObjLoc; //player can move up only on the ladder
 }
 //========================================================================
-Location Map::downMove(const Location& Objloc) const{
-	if (mapException(Location(Objloc.row+1, Objloc.col))) //player can't move to the wall
-		return Objloc; 
+Location Map::downMove(const Location& objLoc) const{
+	if (!mapException(Location(objLoc.row + 1, objLoc.col)))
+		return objLoc;
 
-	if (this->m_stageMap[Objloc.row + 1][Objloc.col] == LADDER)
-		return Location(Objloc.row+1,Objloc.col);     //player move down on ladder
+	if (getContent(Location(objLoc.row + 1, objLoc.col)) == NOTHING)
+		return getLocationAfterFallDown(Location(objLoc.row + 1, objLoc.col));
+	if (getContent(Location(objLoc.row + 1, objLoc.col)) == LADDER)
+		return Location(objLoc.row + 1, objLoc.col);
 
-	return getLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
+	return objLoc;
 }
 //========================================================================
 Location Map::rightMove(const Location& objLoc) const{
-	if (mapException(Location(objLoc.row, objLoc.col + 1))) //player can't move to the wall
+	if (!mapException(Location(objLoc.row, objLoc.col + 1))) //player can't move to the wall
 		return objLoc;
+	if (getContent(Location(objLoc.row, objLoc.col + 1)) == ROD||
+		getContent(Location(objLoc.row, objLoc.col + 1)) == LADDER ||
+		!mapException(Location(objLoc.row + 1, objLoc.col + 1)))
+		return(Location(objLoc.row, objLoc.col + 1));
 
-	if (this->m_stageMap[objLoc.row + 1][objLoc.col + 1] != WALL &&
-		this->m_stageMap[objLoc.row + 1][objLoc.col + 1] != LADDER) //player on ladder
-		return getLocationAfterFallDown(Location(objLoc.row, objLoc.col + 1));
+	else if(getContent(Location(objLoc.row + 1, objLoc.col + 1)) != WALL &&
+		getContent(Location(objLoc.row + 1, objLoc.col + 1)) != LADDER)
+		return getLocationAfterFallDown(Location(objLoc.row + 1, objLoc.col + 1));
 
 	return Location(objLoc.row, objLoc.col + 1); //can move right
 }
 //========================================================================
 Location Map::leftMove(const Location& objLoc) const{
-	if (mapException(Location(objLoc.row, objLoc.col - 1))) //player can't move to the wall
+	if (!mapException(Location(objLoc.row, objLoc.col - 1))) //player can't move to the wall
 		return objLoc;
+	if (getContent(Location(objLoc.row, objLoc.col - 1)) == ROD ||
+		getContent(Location(objLoc.row, objLoc.col - 1)) == LADDER ||
+		!mapException(Location(objLoc.row + 1, objLoc.col - 1)))
+		return(Location(objLoc.row, objLoc.col - 1));
 
-	char ch = this->m_stageMap[objLoc.row + 1][objLoc.col - 1];
-	if (this->m_stageMap[1 + objLoc.row][objLoc.col] != WALL &&
-		this->m_stageMap[1 + objLoc.row][objLoc.col ] != LADDER) //player on ladder
-		return getLocationAfterFallDown(Location(objLoc.row, objLoc.col - 1));
+	else if (getContent(Location(objLoc.row + 1, objLoc.col - 1)) != WALL &&
+		getContent(Location(objLoc.row + 1, objLoc.col - 1)) != LADDER)
+		return getLocationAfterFallDown(Location(objLoc.row + 1, objLoc.col - 1));
 
 	return Location(objLoc.row, objLoc.col - 1); //can move left
 }
@@ -89,32 +99,16 @@ Location Map::leftMove(const Location& objLoc) const{
 Location Map::getLocationAfterFallDown(const Location& objloc) const{
 	int row = objloc.row;
 	while (mapException(Location(row, objloc.col))) {
-		if (m_stageMap[row][objloc.col] == ROD)
+		if (getContent(Location(row, objloc.col)) == ROD)
 			break;
-		if (m_stageMap[1 + row][objloc.col] == LADDER) {
-			++row;
+		if (!mapException(Location(1 + row, objloc.col))||
+			getContent(Location(1 + row, objloc.col)) == LADDER ||
+			getContent(Location(1 + row, objloc.col)) == WALL) {
 			break;
 		}
 		row++;
 	}
 	return Location(row,objloc.col);
-}
-//========================================================================
-Location Map::calcEnemyMove(const Location& enemyLoc, 
-	const Location& playerLoc) const{
-	Location moveAns=enemyLoc;
-	if (isRightOf(playerLoc, enemyLoc))
-		moveAns = rightMove(enemyLoc);
-	else if (isLeftOf(playerLoc, enemyLoc))
-		moveAns = leftMove(enemyLoc);
-	if (moveAns == enemyLoc) {
-		if (isAboveOf(playerLoc, enemyLoc))
-			moveAns = upMove(enemyLoc);
-		else
-			moveAns = downMove(enemyLoc);
-	}
-	
-	return moveAns;
 }
 //========================================================================
 char Map::getContent(const Location& loc) const
@@ -123,10 +117,10 @@ char Map::getContent(const Location& loc) const
 }
 //========================================================================
 bool Map::mapException(const Location& loc) const{
-	if (m_stageMap[loc.row][loc.col] == WALL
-		|| !inRectangle(Location(0 , 0), 
-			Location(this->m_mapSize, this->m_mapSize), loc))
-		return true;
+	if (!inRectangle(Location(0, 0), Location(this->m_mapSize, this->m_mapSize), loc))
+		return false;
+	if(m_stageMap[loc.row][loc.col] == WALL)
+		return false;
 
-	return false;
+	return true;
 }

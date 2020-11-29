@@ -15,18 +15,22 @@ bool Location::operator==(const Location& location)const {
 */
 bool inRectangle(const Location& topLeft, const Location& botRight,
 	const Location& location) {
-	return(isAboveOf(location, topLeft) || isLeftOf(location, topLeft) ||
-		isBelowOf(location, botRight) || isRightOf(location, botRight));
+	bool above = isAboveOf(location, topLeft),
+		blow = isBelowOf(location, botRight),
+		left = isLeftOf(location, topLeft),
+		right = isRightOf(location, botRight);
+	return(!(isAboveOf(location, topLeft) || isLeftOf(location, topLeft) ||
+		isBelowOf(location, botRight) || isRightOf(location, botRight)));
 }
 bool isLeftOf(const Location& testLoc, const Location& loc) {
 	return(loc.col > testLoc.col);
 }
 bool isRightOf(const Location& testLoc, const Location& loc) {
-	return(loc.col < testLoc.col);
+	return(!isLeftOf(testLoc,loc));
 }
 bool isAboveOf(const Location& testLoc, const Location& loc) {
-	return(loc.row < testLoc.row);
+	return(loc.row > testLoc.row);
 }
 bool isBelowOf(const Location& testLoc, const Location& loc) {
-	return(loc.row > testLoc.row);
+	return(!isAboveOf(testLoc, loc));
 }

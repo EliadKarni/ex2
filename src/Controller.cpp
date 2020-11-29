@@ -47,6 +47,8 @@ void Controller::runGame() {
 		else
 			this->checkForCoinsCollect();
 	}
+	system("cls");
+	printScore();
 }
 /*----------------------------------------------------------------------------
  * The method print the game score.
@@ -54,8 +56,10 @@ void Controller::runGame() {
  * output: none.
 */
 void Controller::printScore() {
-	std::cout << (this->m_state.getLifeState() == 0) ?
-		"you lost the game!\n" : "you won the game!\n";
+	if (this->m_state.getLifeState() == 0)
+		std::cout << "you lost the game!\n";
+	else
+		std::cout << "you won the game!\n";
 	std::cout << "your score is: " << this->m_state.getScoreState();
 }
 /*----------------------------------------------------------------------------

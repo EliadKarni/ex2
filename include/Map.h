@@ -45,7 +45,6 @@ public:
 	Location downMove                    (const Location&)const;
 	Location rightMove                   (const Location&)const;
 	Location leftMove                    (const Location&)const;
-	Location calcEnemyMove  (const Location&, const Location&)const;
 	char getContent(const Location&)					  const;
 	bool mapException(const Location&) const;
 };
