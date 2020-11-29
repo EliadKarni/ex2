@@ -13,3 +13,4 @@ add_executable (ex2)
 
 add_subdirectory (include)
 add_subdirectory (src)
+add_subdirectory (resources)

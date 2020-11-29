@@ -4,7 +4,6 @@
  * Sharon Levi | ID: 311593313 | login: sharonlevi
  * Eliad Karni | ID: 206329104 | login: eliadka
  *
- *
  */
 
  //---------------------------- include section ------------------------------

@@ -11,8 +11,6 @@
 #include "Map.h"
 #include "io.h"
 
-//------------------------------ using section -------------------------------
-using std::vector;
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building  the object using array of 3 received Vertexes.
@@ -139,6 +137,9 @@ void Controller::printStage() const {
 			std::cout << stage[row][col];
 		std::cout << std::endl;
 	}
+	std::cout << "level: " << this->m_state.getLevelState()
+		<< " life: " << this->m_state.getLifeState()
+		<< " score: " << this->m_state.getScoreState() << std::endl;
 }
 /*----------------------------------------------------------------------------
  * The method is adding the received map the dynamic parameters.

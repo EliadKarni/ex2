@@ -19,7 +19,7 @@ public:
 	Location getLocation()const;
 	//------------------------- method section -------------------------------
 
-	void playTurn(const Map &map, const Location &playerLocation);
+	void playTurn(const Map& map, const Location& playerLocation);
 private:
 	Location m_location;
 };

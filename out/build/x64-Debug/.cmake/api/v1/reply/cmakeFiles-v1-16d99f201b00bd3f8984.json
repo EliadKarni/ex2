@@ -125,6 +125,12 @@
 		},
 		{
 			"path" : "src/CMakeLists.txt"
+		},
+		{
+			"path" : "resources/CMakeLists.txt"
+		},
+		{
+			"path" : "resources/Board.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

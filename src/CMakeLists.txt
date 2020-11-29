@@ -7,4 +7,5 @@
 							"Map.cpp"
 							"BoardReader.cpp"
 							"Utilities.cpp"
+							"Enemy.cpp"
 							)

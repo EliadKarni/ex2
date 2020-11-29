@@ -12,7 +12,7 @@
  * input: none.
  * output: enemy's location on the map.
 */
-Location Enemy::getLocation() const{ return this->m_location; };
+Location Enemy::getLocation()const { return this->m_location; }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
  * The method is update the enemy's location by the played turn.
@@ -20,5 +20,5 @@ Location Enemy::getLocation() const{ return this->m_location; };
  * output: none.
 */
 void Enemy::playTurn(const Map& map, const Location& playerLocation) {
-	this->m_location = map.calcEnemyMove(this->getLocation(),playerLocation);
+	this->m_location = map.calcEnemyMove(this->getLocation(), playerLocation);
 }

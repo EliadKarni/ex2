@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Location.h"
+#include "Utilities.h"
 //------------------------------ gets section --------------------------------
 /*----------------------------------------------------------------------------
  * The get get method return the enemy's location on the map.
@@ -21,7 +22,10 @@ Location Player::getLocation() const { return this->m_location; }
 */
 void Player::PlayTurn(const Map &map){
 	Location newLocation = this->m_location;
-	while (this->m_location == newLocation)
-		newLocation = 
-		map.isMovePossible(this->m_location, Keyboard::getch());
+	while (this->m_location == newLocation) {
+		int key = receiveKey();
+		newLocation =
+			map.isMovePossible(this->m_location, key);
+	}
+	this->m_location = newLocation;
 }

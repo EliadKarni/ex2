@@ -47,47 +47,54 @@ const{
 }
 //========================================================================
 Location Map::upMove(const Location& Objloc) const{
-	if (m_stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME)
+	if (m_stageMap[Objloc.row][Objloc.col] == LADDER)
 		return Location(Objloc.row - 1, Objloc.col);
 
-		return Objloc; //player can move up only on the ladder
+		return Location(Objloc.row - 1, Objloc.col); //player can move up only on the ladder
 }
 //========================================================================
 Location Map::downMove(const Location& Objloc) const{
 	if (mapException(Location(Objloc.row+1, Objloc.col))) //player can't move to the wall
 		return Objloc; 
 
-	if (this->m_stageMap[(Objloc.row + 1)][Objloc.col] == LADDER)
+	if (this->m_stageMap[Objloc.row + 1][Objloc.col] == LADDER)
 		return Location(Objloc.row+1,Objloc.col);     //player move down on ladder
 
 	return getLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
-Location Map::rightMove(const Location& Objloc) const{
-	if (mapException(Location(Objloc.row, Objloc.col + 1))) //player can't move to the wall
-		return Objloc;
+Location Map::rightMove(const Location& objLoc) const{
+	if (mapException(Location(objLoc.row, objLoc.col + 1))) //player can't move to the wall
+		return objLoc;
 
-	if (this->m_stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME &&
-		this->m_stageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
-		return Objloc;
+	if (this->m_stageMap[objLoc.row + 1][objLoc.col + 1] != WALL &&
+		this->m_stageMap[objLoc.row + 1][objLoc.col + 1] != LADDER) //player on ladder
+		return getLocationAfterFallDown(Location(objLoc.row, objLoc.col + 1));
 
-	return Location(Objloc.row, Objloc.col + 1); //can move right
+	return Location(objLoc.row, objLoc.col + 1); //can move right
 }
 //========================================================================
-Location Map::leftMove(const Location& Objloc) const{
-	if (mapException(Location(Objloc.row, Objloc.col - 1))) //player can't move to the wall
-		return Objloc;
+Location Map::leftMove(const Location& objLoc) const{
+	if (mapException(Location(objLoc.row, objLoc.col - 1))) //player can't move to the wall
+		return objLoc;
 
-	if (this->m_stageMap[Objloc.row][Objloc.col] == 'S' &&
-		this->m_stageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
-		return Objloc;
+	char ch = this->m_stageMap[objLoc.row + 1][objLoc.col - 1];
+	if (this->m_stageMap[1 + objLoc.row][objLoc.col] != WALL &&
+		this->m_stageMap[1 + objLoc.row][objLoc.col ] != LADDER) //player on ladder
+		return getLocationAfterFallDown(Location(objLoc.row, objLoc.col - 1));
 
-	return Location(Objloc.row, Objloc.col - 1); //can move left
+	return Location(objLoc.row, objLoc.col - 1); //can move left
 }
 //========================================================================
 Location Map::getLocationAfterFallDown(const Location& objloc) const{
-	int row=objloc.row+1;
-	while (m_stageMap[row][objloc.col] == NOTHING) {
+	int row = objloc.row;
+	while (mapException(Location(row, objloc.col))) {
+		if (m_stageMap[row][objloc.col] == ROD)
+			break;
+		if (m_stageMap[1 + row][objloc.col] == LADDER) {
+			++row;
+			break;
+		}
 		row++;
 	}
 	return Location(row,objloc.col);

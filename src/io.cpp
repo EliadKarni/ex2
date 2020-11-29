@@ -6,7 +6,7 @@
 #undef VC_EXTRALEAN
 #undef WIN32_LEAN_AND_MEAN
 
-#define USE_CONIO 0
+#define USE_CONIO 1
 
 #if USE_CONIO
 

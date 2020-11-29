@@ -42,7 +42,6 @@ bool BoardReader::thereIsNextLevel() {
 Map BoardReader::readNextLevel() {
 	vector<vector<char>> map;
 	bool playerReceived = false;
-	std::string receivedline;
 	char receivedChar;
 	int size = receiveMapSize();
 
@@ -98,6 +97,7 @@ Map BoardReader::readNextLevel() {
 				break;
 			}
 		}
+		this->m_boardReader.get();
 		map.push_back(receivedMapRow);
 	}
 	if (!playerReceived)
@@ -119,5 +119,6 @@ int BoardReader::receiveMapSize() {
 		size *= 10;
 		size += charSize[i] - '0';
 	}
+	this->m_boardReader.get();//get /n
 	return size;
 }
