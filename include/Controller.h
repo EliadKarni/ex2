@@ -18,9 +18,7 @@ class Controller {
 public:
 	//------------------------- constractors section -------------------------
 
-	Controller() :m_boardReader(BoardReader()), m_coinsList({}),
-		m_enemyList({}), m_map(Map()), m_player(Player(Location())),
-		m_state(PlayerState()){};
+	Controller();
 	//------------------------- method section -------------------------------
 
 	void runGame();

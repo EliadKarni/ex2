@@ -26,24 +26,24 @@ private:
 	vector<Location> m_initialEnemiesLoc;
 	
 public:
-	Map(vector<vector<char>> stage = {},
+	Map(vector<vector<char>> m_stage = {},
 		Location m_initialPlayerLoc = Location(),
 		vector<Location> m_initialCoinsLoc = {},
 		vector<Location> m_initialEnemiesLoc = {});
 
-	Location GetInitialPlayerLocation()					const;
-	vector<Location> GetInitalsEnemyLocationsList()		const;
+	Location getInitialPlayerLoc()						const;
+	vector<Location> getInitalsEnemyLocs()				const;
+	vector<Location> getInitalsCoinsLocs()				const;
 	vector<vector<char>> getStageMap()					const;
 	int getMapSize()									const;
 	
 	Location isMovePossible         (const Location&, int)const;
-	Location GetLocationAfterFallDown    (const Location&)const;
-	Location UpMove                      (const Location&)const;
-	Location DownMove                    (const Location&)const;
-	Location RightMove                   (const Location&)const;
-	Location LeftMove                    (const Location&)const;
-	Location FoolEnemy                   (const Location&)const;
-	Location SmartEnemy(const Location&, const Location& )const;
-	char GetContent(const Location&) const;
-	bool MapException(const Location&);
+	Location getLocationAfterFallDown    (const Location&)const;
+	Location upMove                      (const Location&)const;
+	Location downMove                    (const Location&)const;
+	Location rightMove                   (const Location&)const;
+	Location leftMove                    (const Location&)const;
+	Location calcEnemyMove  (const Location&, const Location&)const;
+	char getContent(const Location&)					  const;
+	bool mapException(const Location&) const;
 };

@@ -4,23 +4,26 @@
 #include "io.h"
 #include <ostream>
 #include <vector>
-#include <time.h>
 using std::ifstream;
 
 //========================================================================
-Map::Map(vector<vector<char>> stage = {},
-	Location initialPlayerLoc = Location(),
-	vector<Location> initialCoinsLoc = {},
-	vector<Location> initialEnemiesLoc = {}) :
+Map::Map(vector<vector<char>> stage, Location initialPlayerLoc,
+	vector<Location> initialCoinsLoc, vector<Location> initialEnemiesLoc) :
 	m_stageMap(stage), m_mapSize(stage.size()),
 	m_initialPlayerLoc(initialPlayerLoc), m_initialCoinsLoc(initialCoinsLoc),
 	m_initialEnemiesLoc(initialEnemiesLoc) {}
 
 //========================================================================
-vector<vector<char>> Map::getStageMap()              const { return m_stageMap; }
-int    Map::getMapSize()                             const { return m_mapSize;  }
-Location Map::GetInitialPlayerLocation()             const { return m_initialPlayerLoc; }
-vector<Location> Map::GetInitalsEnemyLocationsList() const { return this->m_initialEnemiesLoc; }
+vector<vector<char>> Map::getStageMap()const 
+{ return m_stageMap; }
+int    Map::getMapSize()const 
+{ return m_mapSize;  }
+Location Map::getInitialPlayerLoc()const 
+{ return this->m_initialPlayerLoc; }
+vector<Location> Map::getInitalsCoinsLocs()const
+{ return this->m_initialCoinsLoc; }
+vector<Location> Map::getInitalsEnemyLocs() const 
+{ return this->m_initialEnemiesLoc; }
 //========================================================================
 /*
 * Input: Location of some object and keyboard value(UP/DOWN/LEFT/RIGHT)
@@ -31,59 +34,59 @@ Location Map::isMovePossible(const Location& Objloc, int WantedMove )
 const{
 	switch (WantedMove) {
 	case KB_UP: 
-		return UpMove(Objloc);
+		return upMove(Objloc);
 		
 	case KB_DOWN:
-		return DownMove(Objloc);
+		return downMove(Objloc);
 
 	case KB_LEFT:
-		return LeftMove(Objloc);
+		return leftMove(Objloc);
 
 	case KB_RIGHT:
-		return RightMove(Objloc);
+		return rightMove(Objloc);
 	}
 }
 //========================================================================
-Location Map::UpMove(const Location& Objloc) const{
+Location Map::upMove(const Location& Objloc) const{
 	if (m_stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME)
 		return Location(Objloc.row - 1, Objloc.col);
 
 		return Objloc; //player can move up only on the ladder
 }
 //========================================================================
-Location Map::DownMove(const Location& Objloc) const{
-	if (MapException(Location(Objloc.row+1, Objloc.col))) //player can't move to the wall
+Location Map::downMove(const Location& Objloc) const{
+	if (mapException(Location(Objloc.row+1, Objloc.col))) //player can't move to the wall
 		return Objloc; 
 
-	if (StageMap[Objloc.row + 1][Objloc.col] == LADDER)
+	if (this->m_stageMap[(Objloc.row + 1)][Objloc.col] == LADDER)
 		return Location(Objloc.row+1,Objloc.col);     //player move down on ladder
 
-	return GetLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
+	return getLocationAfterFallDown(Objloc); //player can fall down from rod/ladder/floor
 }
 //========================================================================
-Location Map::RightMove(const Location& Objloc) const{
-	if (MapException(Location(Objloc.row, Objloc.col + 1))) //player can't move to the wall
+Location Map::rightMove(const Location& Objloc) const{
+	if (mapException(Location(Objloc.row, Objloc.col + 1))) //player can't move to the wall
 		return Objloc;
 
-	if (StageMap[Objloc.row][Objloc.col] == ON_LADDER &&
-		StageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
+	if (this->m_stageMap[Objloc.row][Objloc.col] == PLAYER_CLIME &&
+		this->m_stageMap[Objloc.row+1][Objloc.col + 1] == NOTHING) //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col + 1); //can move right
 }
 //========================================================================
-Location Map::LeftMove(const Location& Objloc) const{
-	if (MapException(Location(Objloc.row, Objloc.col - 1))) //player can't move to the wall
+Location Map::leftMove(const Location& Objloc) const{
+	if (mapException(Location(Objloc.row, Objloc.col - 1))) //player can't move to the wall
 		return Objloc;
 
-	if (StageMap[Objloc.row][Objloc.col] == 'S' &&
-		StageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
+	if (this->m_stageMap[Objloc.row][Objloc.col] == 'S' &&
+		this->m_stageMap[Objloc.row-1][Objloc.col - 1] == NOTHING)   //player on ladder
 		return Objloc;
 
 	return Location(Objloc.row, Objloc.col - 1); //can move left
 }
 //========================================================================
-Location Map::GetLocationAfterFallDown(const Location& objloc) const{
+Location Map::getLocationAfterFallDown(const Location& objloc) const{
 	int row=objloc.row+1;
 	while (m_stageMap[row][objloc.col] == NOTHING) {
 		row++;
@@ -91,41 +94,32 @@ Location Map::GetLocationAfterFallDown(const Location& objloc) const{
 	return Location(row,objloc.col);
 }
 //========================================================================
-Location Map::FoolEnemy(const Location& EnemyLoc) const{
-	srand(time(NULL));
-	int randMove = (rand() % 4) + 1; 
-	switch (randMove) {
-	case 1: //move enemy up
-		return Location(EnemyLoc.row - 1, EnemyLoc.col);
-	case 2: //move enemy left
-		return Location(EnemyLoc.row, EnemyLoc.col - 1);
-	case 3: //move enemy right
-		return Location(EnemyLoc.row, EnemyLoc.col + 1);
+Location Map::calcEnemyMove(const Location& enemyLoc, 
+	const Location& playerLoc) const{
+	Location moveAns;
+	if (isRightOf(playerLoc, enemyLoc))
+		moveAns = rightMove(enemyLoc);
+	else if (isLeftOf(playerLoc, enemyLoc))
+		moveAns = leftMove(enemyLoc);
+	if (moveAns == enemyLoc) {
+		if (isAboveOf(playerLoc, enemyLoc))
+			moveAns = upMove(enemyLoc);
+		else
+			moveAns = downMove(enemyLoc);
 	}
-	//move enemy down:
-	return Location(EnemyLoc.row + 1, EnemyLoc.col);
+	
+	return moveAns;
 }
 //========================================================================
-/*
-FUNCTION IN CONSRUCTION - NOT TO USE FOR NOW !!!
-*/
-Location Map::SmartEnemy(const Location& Enemy, const Location& Player) {
-}
-//========================================================================
-bool Map::isLevelsOver() {
-	if (this->fileReader.eof())
-		return true;
-
-	return false;
-}
-//========================================================================
-char Map::GetContent(const Location& loc) const
+char Map::getContent(const Location& loc) const
 {
 	return m_stageMap[loc.row][loc.col];
 }
 //========================================================================
-bool Map::MapException(const Location& loc) {
-	if (m_stageMap[loc.row][loc.col] == WALL || loc.row == 0 || loc.col == 0)
+bool Map::mapException(const Location& loc) const{
+	if (m_stageMap[loc.row][loc.col] == WALL
+		|| !inRectangle(Location(0 , 0), 
+			Location(this->m_mapSize, this->m_mapSize), loc))
 		return true;
 
 	return false;

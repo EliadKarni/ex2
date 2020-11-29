@@ -1,6 +1,6 @@
 #pragma once
 //------------------------------ defines section -----------------------------
-#define BOARD_PATH "\levels\level.txt"
+#define BOARD_PATH "\\levels\\level.txt"
 //---------------------------- include section -------------------------------
 #include <fstream>
 #include <vector>
@@ -19,7 +19,6 @@ public:
 	Map readNextLevel();
 private:
 	int receiveMapSize();
-	void resetArgs();
 
 	ifstream m_boardReader;
 	int m_fileTextSize;

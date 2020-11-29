@@ -1,3 +1,4 @@
+#pragma once
 /* Controller
  * ===========================================================================
  */
@@ -19,13 +20,10 @@ using std::vector;
  * input: The constractor is the default constractor.
  * output: none.
 */
-Controller::Controller() {
-	this->m_map = Map();
-	this->m_coinsList = {};
-	this->m_enemyList = {};
-	this->m_player = Player();
-	this->m_boardReader = BoardReader();
-}
+Controller::Controller() :m_boardReader(BoardReader()), m_coinsList({}),
+	m_enemyList({}), m_map(Map()), m_player(Player(Location())),
+	m_state(PlayerState()) 
+{}
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
  * The method is loading the level, then running the levels till the game
@@ -100,13 +98,13 @@ void Controller::checkForCoinsCollect() {
 void Controller::playerDead() {
 	this->m_state.die();
 	if (this->m_state.getLifeState() > 0) {
-		// coins get this->m_coinsList = this->m_map.
+		this->m_coinsList = this->m_map.getInitalsCoinsLocs();
 		this->m_enemyList = {};
-		for(int i = 0; i < this->m_map.GetInitalsEnemyLocationsList().size()
+		for(int i = 0; i < this->m_map.getInitalsEnemyLocs().size()
 			; ++i)
 			this->m_enemyList.push_back(
-				Enemy(this->m_map.GetInitalsEnemyLocationsList()[i]));
-		this->m_player = this->m_map.GetInitialPlayerLocation();
+				Enemy(this->m_map.getInitalsEnemyLocs()[i]));
+		this->m_player = this->m_map.getInitialPlayerLoc();
 	}
 }
 /*----------------------------------------------------------------------------
@@ -115,18 +113,18 @@ void Controller::playerDead() {
  * output: none.
 */
 void Controller::levelUp() {
-	//updating map
+	this->m_map = this->m_boardReader.readNextLevel();
 	this->m_enemyList = {};
 	this->m_coinsList = {};
 
 	this->m_state.levelup();
-	this->m_coinsList = this->m_boardReader.getPrimeCoins();
+	this->m_coinsList = this->m_map.getInitalsCoinsLocs();
 
-	for(int i = 0; i < this->m_boardReader.getPrimeEnemy().size(); ++i){
+	for(int i = 0; i < this->m_map.getInitalsEnemyLocs().size(); ++i){
 		this->m_enemyList.push_back
-		(Enemy(this->m_boardReader.getPrimeEnemy()[i]));
+		(Enemy(this->m_map.getInitalsEnemyLocs()[i]));
 	}
-	this->m_player = Player(this->m_boardReader.getPrimePlayer());
+	this->m_player = Player(this->m_map.getInitialPlayerLoc());
 }
 /*----------------------------------------------------------------------------
  * The method is printing the current stage.

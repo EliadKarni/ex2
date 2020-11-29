@@ -1,3 +1,4 @@
+#pragma once
 /* BoardReader
  * ===========================================================================
  */
@@ -19,6 +20,7 @@ BoardReader::BoardReader() {
 	this->m_boardReader.open(BOARD_PATH);
 	if (!(this->m_boardReader.is_open()))
 		terminate("opening boards files error!");
+
 	int primeLoc = (int)this->m_boardReader.tellg();
 	this->m_boardReader.seekg(0, std::ios::end);
 	this->m_fileTextSize = (int)this->m_boardReader.tellg();
@@ -45,7 +47,10 @@ Map BoardReader::readNextLevel() {
 	char receivedChar;
 	int size = receiveMapSize();
 
-	resetArgs();
+	Location playerLoc;
+	vector<Location> enemysLocs;
+	vector<Location> coinsLocs;
+
 	for (int i = 0; i < size; ++i) {
 		vector<char> receivedMapRow = {};
 		for (int j = 0; j < size; ++j) {
@@ -56,18 +61,18 @@ Map BoardReader::readNextLevel() {
 				if (playerReceived)
 					terminate("player received twice!");
 				playerReceived = true;
-				this->m_primePlayerLoc = Location(i,j);
+				playerLoc = Location(i, j);
 				receivedMapRow.push_back(NOTHING);
 				break;
 			case PLAYER_CLIME:
 				if (playerReceived)
 					terminate("player received twice!");
 				playerReceived = true;
-				this->m_primePlayerLoc = Location(i, j);
+				playerLoc = Location(i, j);
 				receivedMapRow.push_back(NOTHING);
 				break;
 			case ENEMY:
-				this->m_primeEnemiesLoc.push_back(Location(i, j));
+				enemysLocs.push_back(Location(i, j));
 				receivedMapRow.push_back(NOTHING);
 				break;
 			case WALL:
@@ -83,13 +88,13 @@ Map BoardReader::readNextLevel() {
 				receivedMapRow.push_back(ROD);
 				break;
 			case COIN:
-				this->m_primeCoinsLoc.push_back(Location(i, j));
+				coinsLocs.push_back(Location(i, j));
 				receivedMapRow.push_back(NOTHING);
 				break;
 			default:
-				string errorMessage = "receiving the char ";
-					errorMessage.append(1, receivedChar);
-					errorMessage.append(" not declered!");
+				std::string errorMessage = "receiving the char ";
+				errorMessage.append(1, receivedChar);
+				errorMessage.append(" not declered!");
 				terminate(errorMessage);
 				break;
 			}
@@ -98,7 +103,7 @@ Map BoardReader::readNextLevel() {
 	}
 	if (!playerReceived)
 		terminate("player location where not received!");
-	return map;
+	return Map(map, playerLoc, coinsLocs, enemysLocs);
 }
 /*----------------------------------------------------------------------------
  * The method .
@@ -107,7 +112,7 @@ Map BoardReader::readNextLevel() {
 */
 int BoardReader::receiveMapSize() {
 	unsigned int size = 0;
-	string charSize;
+	std::string charSize;
 	this->m_boardReader >> charSize;
 	for (int i = 0; i < charSize.size(); ++i) {
 		if (!isdigit(charSize[i]))
@@ -116,13 +121,4 @@ int BoardReader::receiveMapSize() {
 		size += charSize[i] - '0';
 	}
 	return size;
-}
-/*----------------------------------------------------------------------------
- * The method .
- * input: .
- * output: .
-*/
-void BoardReader::resetArgs() {
-	this->m_primeCoinsLoc = this->m_primeEnemiesLoc = {};
-	this->m_primePlayerLoc = Location();
 }

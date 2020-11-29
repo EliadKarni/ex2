@@ -1,5 +1,5 @@
+#pragma once
 #include <stdlib.h>
-#include <fstream>
 #include <iostream>
 
 void terminate(const std::string &errorMessage) {
