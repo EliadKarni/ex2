@@ -6,7 +6,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <iostream>
-#include "Utilities.cpp"
+#include "Utilities.h"
 #include "Map.h"
 
 //-------------------------- constractors section ----------------------------
