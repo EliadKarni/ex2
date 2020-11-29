@@ -1,6 +1,6 @@
 #pragma once
 //------------------------------ defines section -----------------------------
-#define BOARD_PATH "\\levels\\level.txt"
+#define BOARD_PATH "Board.txt"
 //---------------------------- include section -------------------------------
 #include <fstream>
 #include <vector>

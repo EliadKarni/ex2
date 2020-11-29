@@ -19,3 +19,13 @@
 5	740	628311237	CMakeFiles/ex2.dir/src/Player.cpp.obj	8e520934e0182c6e
 11	818	628311237	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
 15	834	628311237	CMakeFiles/ex2.dir/src/BoardReader.cpp.obj	d59cc12a7b1384bd
+0	10	0	clean	9992afb1f91dc381
+5	801	628334540	CMakeFiles/ex2.dir/src/Player_state.cpp.obj	863edc37273cbe52
+21	813	628334540	CMakeFiles/ex2.dir/src/Location.cpp.obj	8b4ecfa0b906e654
+18	1235	628334540	CMakeFiles/ex2.dir/src/io.cpp.obj	85d72a2173b5892e
+24	1273	628334540	CMakeFiles/ex2.dir/src/Utilities.cpp.obj	400b38df9ab69632
+1	1306	628334540	CMakeFiles/ex2.dir/src/Player.cpp.obj	8e520934e0182c6e
+11	1308	628334540	CMakeFiles/ex2.dir/src/Map.cpp.obj	8b83f1511ba702da
+8	1322	628334540	CMakeFiles/ex2.dir/src/main.cpp.obj	2f98b044ad0e4519
+15	1378	628334540	CMakeFiles/ex2.dir/src/Controller.cpp.obj	39fee2502c3ea397
+27	1412	628334540	CMakeFiles/ex2.dir/src/BoardReader.cpp.obj	d59cc12a7b1384bd
