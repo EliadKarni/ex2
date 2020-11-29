@@ -96,7 +96,7 @@ Location Map::getLocationAfterFallDown(const Location& objloc) const{
 //========================================================================
 Location Map::calcEnemyMove(const Location& enemyLoc, 
 	const Location& playerLoc) const{
-	Location moveAns;
+	Location moveAns=enemyLoc;
 	if (isRightOf(playerLoc, enemyLoc))
 		moveAns = rightMove(enemyLoc);
 	else if (isLeftOf(playerLoc, enemyLoc))
