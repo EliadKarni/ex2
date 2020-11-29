@@ -1,7 +1,6 @@
 #pragma once
 //---------------------------- include section -------------------------------
 #include <string.h>
-#include <fstream>
 #include <vector>
 #include "player.h"
 #include "Enemy.h"

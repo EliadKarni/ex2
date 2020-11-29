@@ -1,3 +1,7 @@
+#ifdef DEBUG
+
+#endif // DEBUG
+
 #pragma once
 
 struct Location

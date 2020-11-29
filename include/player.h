@@ -15,7 +15,7 @@ public:
 		: m_location(location) {}
 	//-------------------------- gets section --------------------------------
 
-	Location getLocation() const { return this->m_location; };
+	Location getLocation() const;
 	//------------------------- method section -------------------------------
 
 	void PlayTurn(const Map &map);
