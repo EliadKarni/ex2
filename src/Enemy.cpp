@@ -20,5 +20,5 @@ Location Enemy::getLocation() const{ return this->m_location; };
  * output: none.
 */
 void Enemy::playTurn(const Map& map, const Location& playerLocation) {
-	this->m_location = map.calcEnemyMove();
+	this->m_location = map.calcEnemyMove(this->getLocation(),playerLocation);
 }
