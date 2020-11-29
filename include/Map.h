@@ -1,3 +1,5 @@
+#ifndef _Map_H
+#define _Map_H
 #pragma once
 #include <iostream>
 #include <fstream>
@@ -47,3 +49,4 @@ public:
 	char getContent(const Location&)					  const;
 	bool mapException(const Location&) const;
 };
+#endif // !_Map_H

@@ -1,3 +1,5 @@
+#ifndef _player_state_H
+#define _player_state_H
 #pragma once
 //------------------------------ defines section -----------------------------
 #define NUM_OF_LIFE 3
@@ -29,3 +31,4 @@ private:
 	unsigned int m_score;
 	unsigned int m_level;
 };
+#endif // !_player_state_H

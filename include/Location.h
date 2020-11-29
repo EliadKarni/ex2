@@ -1,7 +1,5 @@
-#ifdef DEBUG
-
-#endif // DEBUG
-
+#ifndef _Location_H
+#define _Location_H
 #pragma once
 
 struct Location
@@ -18,3 +16,4 @@ bool isLeftOf(const Location& testLoc, const Location& loc);
 bool isRightOf(const Location& testLoc, const Location& loc);
 bool isAboveOf(const Location& testLoc, const Location& loc);
 bool isBelowOf(const Location& testLoc, const Location& loc);
+#endif // !_Location_H

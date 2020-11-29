@@ -1,3 +1,5 @@
+#ifndef _Player_H
+#define _Player_H
 #pragma once
 //---------------------------- include section -------------------------------
 #include "Location.h"
@@ -22,3 +24,4 @@ public:
 private:
 	Location m_location;
 };
+#endif // !_Player_H

@@ -1,3 +1,6 @@
+#ifndef _Controller_H
+#define _Controller_H
+
 #pragma once
 //---------------------------- include section -------------------------------
 #include <string.h>
@@ -36,3 +39,4 @@ private:
 	PlayerState m_state;
 	BoardReader m_boardReader;
 };
+#endif // !__Controller_H

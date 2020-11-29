@@ -1,3 +1,5 @@
+#ifndef _Enemy_H
+#define _Enemy_H
 #pragma once
 //---------------------------- include section -------------------------------
 #include "Location.h"
@@ -21,3 +23,4 @@ public:
 private:
 	Location m_location;
 };
+#endif // !_Enemy_H
