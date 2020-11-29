@@ -33,11 +33,11 @@ public:
 		vector<Location> m_initialCoinsLoc = {},
 		vector<Location> m_initialEnemiesLoc = {});
 
-	Location getInitialPlayerLoc()						const;
-	vector<Location> getInitalsEnemyLocs()				const;
-	vector<Location> getInitalsCoinsLocs()				const;
-	vector<vector<char>> getStageMap()					const;
-	int getMapSize()									const;
+	Location getInitialPlayerLoc()			const;
+	vector<Location> getInitalsEnemyLocs()		const;
+	vector<Location> getInitalsCoinsLocs()		const;
+	vector<vector<char>> getStageMap()		const;
+	int getMapSize()				const;
 	
 	Location isMovePossible         (const Location&, int)const;
 	Location getLocationAfterFallDown    (const Location&)const;
@@ -45,7 +45,7 @@ public:
 	Location downMove                    (const Location&)const;
 	Location rightMove                   (const Location&)const;
 	Location leftMove                    (const Location&)const;
-	char getContent(const Location&)					  const;
-	bool mapException(const Location&) const;
+	char getContent(const Location&)		      const;
+	bool mapException(const Location&)                    const;
 };
 #endif // !_Map_H
