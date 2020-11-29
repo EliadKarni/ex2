@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Map.h"
 #include "Location.h"
+#include "Utilities.h"
 //------------------------------ gets section --------------------------------
 /*----------------------------------------------------------------------------
  * The get get method return the enemy's location on the map.
@@ -21,18 +22,18 @@ Location Enemy::getLocation()const { return this->m_location; }
 */
 void Enemy::playTurn(const Map& map, const Location& playerLocation) {
 	Location moveAns = this->m_location;
-	
-	if (isRightOf(playerLocation, getLocation()))
-		moveAns = map.rightMove(getLocation());
-	else if (isLeftOf(playerLocation, getLocation()))
-		moveAns = map.leftMove(getLocation());
+	if (getLocation().col != playerLocation.col) {
+		if (isRightOf(playerLocation, getLocation()))
+			moveAns = map.rightMove(getLocation());
+		else if (isLeftOf(playerLocation, getLocation()))
+			moveAns = map.leftMove(getLocation());
+	}
 	if (moveAns == getLocation()) {
 		if (isAboveOf(playerLocation, getLocation()))
 			moveAns = map.upMove(getLocation());
 		else
 			moveAns = map.downMove(getLocation());
 	}
-	if (moveAns == getLocation())
-		return;
+	moveObject(map, getLocation(), moveAns, ENEMY);
 	this->m_location = moveAns;
 }

@@ -21,5 +21,4 @@ private:
 	int receiveMapSize();
 
 	ifstream m_boardReader;
-	int m_fileTextSize;
 };

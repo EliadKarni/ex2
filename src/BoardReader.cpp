@@ -19,11 +19,6 @@ BoardReader::BoardReader() {
 	this->m_boardReader.open(BOARD_PATH);
 	if (!(this->m_boardReader.is_open()))
 		terminate("opening boards files error!");
-
-	int primeLoc = (int)this->m_boardReader.tellg();
-	this->m_boardReader.seekg(0, std::ios::end);
-	this->m_fileTextSize = (int)this->m_boardReader.tellg();
-	this->m_boardReader.seekg(primeLoc);
 }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
@@ -32,7 +27,7 @@ BoardReader::BoardReader() {
  * output: .
 */
 bool BoardReader::thereIsNextLevel() {
-	return (this->m_boardReader.tellg() == (int)this->m_fileTextSize);
+	return (isdigit(this->m_boardReader.peek()));
 }
 /*----------------------------------------------------------------------------
  * The method .
@@ -97,7 +92,8 @@ Map BoardReader::readNextLevel() {
 				break;
 			}
 		}
-		this->m_boardReader.get();
+		if(this->m_boardReader.peek() != '\0')
+			this->m_boardReader.get();
 		map.push_back(receivedMapRow);
 	}
 	if (!playerReceived)

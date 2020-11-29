@@ -10,6 +10,7 @@
 #include "BoardReader.h"
 #include "Map.h"
 #include "io.h"
+#include "Utilities.h"
 
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
@@ -37,15 +38,14 @@ void Controller::runGame() {
 			else
 				break;
 		}
-		this->printStage();
 		//-------------------------- play turns ------------------------------
 		this->m_player.PlayTurn(this->m_map);
+		//------------------- play enemyes turns -----------------------------
 		if (this->playEnemyesTurn()) {
 			this->playerDead();
 		}
 		//--------------------- check for coins collection -------------------
-		else
-			this->checkForCoinsCollect();
+		this->checkForCoinsCollect();
 	}
 	system("cls");
 	printScore();
@@ -85,11 +85,27 @@ bool Controller::playEnemyesTurn() {
  * output: none.
 */
 void Controller::checkForCoinsCollect() {
-	for (int i = 0; i < this->m_coinsList.size(); ++i)
+	for (int i = 0; i < this->m_coinsList.size(); ++i) {
 		if (this->m_coinsList[i] == this->m_player.getLocation()) {
+			moveObject(this->m_map, this->m_coinsList[i], this->m_coinsList[i],
+				PLAYER);
 			this->m_coinsList.erase(this->m_coinsList.begin() + i);
 			m_state.collectCoin();
 		}
+		else {
+			bool enemyLocation = false;
+			for(int j = 0; j < this->m_enemyList.size(); ++j)
+				if (this->m_enemyList[j].getLocation() == this->m_coinsList[i]) {
+					enemyLocation = true;
+					break;
+				}
+			if (!enemyLocation) {
+				Screen::setLocation(this->m_coinsList[i]);
+				moveObject(this->m_map, this->m_coinsList[i], this->m_coinsList[i],
+					COIN);
+			}
+		}
+	}
 }
 /*----------------------------------------------------------------------------
  * The method update the needed data in the player deth occation
@@ -107,6 +123,7 @@ void Controller::playerDead() {
 				Enemy(this->m_map.getInitalsEnemyLocs()[i]));
 		this->m_player = this->m_map.getInitialPlayerLoc();
 	}
+	printStage();
 }
 /*----------------------------------------------------------------------------
  * The method is update the needed data in an level up occation.
@@ -126,6 +143,8 @@ void Controller::levelUp() {
 		(Enemy(this->m_map.getInitalsEnemyLocs()[i]));
 	}
 	this->m_player = Player(this->m_map.getInitialPlayerLoc());
+
+	printStage();
 }
 /*----------------------------------------------------------------------------
  * The method is printing the current stage.

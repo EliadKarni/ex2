@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Utilities.h"
 #include "io.h"
+#include "Map.h"
+#include "Location.h"
 
 void terminate(const std::string &errorMessage) {
 	std::cerr << errorMessage << std::endl;
@@ -55,5 +57,15 @@ int handleSpecialKey()
     default:
         std::cout << "Unknown special key pressed (code = " << c << ")\n";
         break;
+    }
+    return 0;
+}
+
+void moveObject(const Map& map, const Location& init, const Location& dest, char symbol) {
+    if (map.mapException(init) && map.mapException(dest)) {
+        Screen::setLocation(init);
+        std::cout << map.getContent(init);
+        Screen::setLocation(dest);
+        std::cout << symbol;
     }
 }

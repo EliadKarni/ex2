@@ -27,5 +27,9 @@ void Player::PlayTurn(const Map &map){
 		newLocation =
 			map.isMovePossible(this->m_location, key);
 	}
+	if (map.getContent(newLocation) == LADDER)
+		moveObject(map, getLocation(), newLocation, PLAYER_CLIME);
+	else
+		moveObject(map, getLocation(), newLocation, PLAYER);
 	this->m_location = newLocation;
 }
