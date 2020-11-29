@@ -1,3 +1,5 @@
+#ifndef _io_H
+#define _io_H
 #pragma once
 
 #include "Location.h"
@@ -25,3 +27,4 @@ void resetLocation();
 // Set terminal cursor location to the desired location
 void setLocation(const Location& location);
 }
+#endif // !_io_H
