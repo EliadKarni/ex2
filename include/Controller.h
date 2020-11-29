@@ -32,6 +32,8 @@ public:
 	void printStage()const;
 	void addMapParameters(vector<vector<char>>& stage)const;
 private:
+	//------------------------ members section -------------------------------
+
 	Map m_map;
 	vector<Location> m_coinsList;
 	vector<Enemy> m_enemyList;

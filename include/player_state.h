@@ -27,6 +27,8 @@ public:
 	void collectCoin();
 	void levelup();
 private:
+	//------------------------ members section -------------------------------
+
 	unsigned int m_life;
 	unsigned int m_score;
 	unsigned int m_level;

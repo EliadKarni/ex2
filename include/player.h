@@ -22,6 +22,8 @@ public:
 
 	void PlayTurn(const Map &map);
 private:
+	//------------------------ members section -------------------------------
+
 	Location m_location;
 };
 #endif // !_Player_H

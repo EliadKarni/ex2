@@ -5,7 +5,8 @@
 #include <fstream>
 #include <vector>
 #include "Map.h"
-
+//------------------------------ using section -------------------------------
+using std::ifstream;
 /*----------------------------------------------------------------------------
  * BoardReader
  * The class is loading the Boards file, and return it's information by the

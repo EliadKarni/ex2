@@ -53,6 +53,7 @@ const{
 	case KB_RIGHT:
 		return rightMove(Objloc);
 	}
+	return Objloc;
 }
 //========================================================================
 /*

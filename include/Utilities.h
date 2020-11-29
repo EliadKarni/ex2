@@ -1,12 +1,13 @@
 #ifndef _Utilities_H
 #define _Utilities_H
 #pragma once
-#include <string.h>
+//---------------------------- include section -------------------------------
+#include <fstream>
 #include "Map.h"
 #include "Location.h"
-
+//----------------------------- const section --------------------------------
 const int KB_ESCAPE = 27;
-
+//--------------------------- prototypes section -----------------------------
 void terminate(const std::string&);
 int receiveKey();
 int handleRegularKey(int c);

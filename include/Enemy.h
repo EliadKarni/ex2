@@ -21,6 +21,8 @@ public:
 
 	void playTurn(const Map& map, const Location& playerLocation);
 private:
+	//------------------------ members section -------------------------------
+
 	Location m_location;
 };
 #endif // !_Enemy_H

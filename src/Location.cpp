@@ -1,14 +1,19 @@
-//all these functions help us to calculate locations in the map.
-
+/* Location.cpp
+ * ===========================================================================
+ * all those functions are calculateing and comparing between 
+ * Locations structs.
+ */
+ //---------------------------- include section -------------------------------
 #include "Location.h"
 
+//---------------------------- functions section -----------------------------
 //========================================================================
 /* The method compare the between the locations and returns if their equals.
  * input: Location wonted to be compared to.
  * output: if the locations equals.
 */
-bool Location::operator==(const Location& location)const {
-	return(this->col == location.col && this->row == location.row);
+bool operator==(const Location& location1 , const Location& location2) {
+	return(location2.col == location1.col && location2.row == location1.row);
 };
 //========================================================================
 /* The method check if the location exist in the rectangle
