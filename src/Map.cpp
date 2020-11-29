@@ -1,9 +1,8 @@
+//---------------------------- include section -------------------------------
 #include "Map.h"
 #include "Location.h"
 #include "io.h"
-#include <ostream>
 #include <vector>
-using std::ifstream;
 
 //========================================================================
 /*

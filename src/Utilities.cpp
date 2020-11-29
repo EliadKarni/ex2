@@ -9,8 +9,10 @@
 #include "Map.h"
 #include "Location.h"
 //========================================================================
-/* input: string
- * output: print the error messege it got and exit from the program(-1)
+/* The function print the received error message and close the program
+* with -1 return value.
+ * input: string
+ * output: none.
 */
 void terminate(const std::string &errorMessage) {
 	std::cerr << errorMessage << std::endl;
@@ -18,7 +20,7 @@ void terminate(const std::string &errorMessage) {
 }
 //========================================================================
 /* input: None.
- * output: The integer value of the key received by the user.
+ * output: The integer value of the received key by the user.
 */
 int receiveKey() {
     for (auto exit = false; !exit; ) {
@@ -55,7 +57,7 @@ int handleRegularKey(int c)
 }
 //========================================================================
 /* input: None.
- * output: The integer value of the key received by the user.
+ * output: The integer value of the received key by the user.
 */
 int handleSpecialKey()
 {
@@ -77,8 +79,11 @@ int handleSpecialKey()
     return 0;
 }
 //========================================================================
-/* input: 
- * output:
+/* The function move the received object from the received location to the
+ * demanded location on the stage.
+ * input: stagemap, the object's initial location, the object's new location,
+ *        the object's symbol on the stale.
+ * output: none.
 */
 void moveObject(const Map& map, const Location& init, const Location& dest, char symbol) {
     if (map.mapException(init) && map.mapException(dest)) {

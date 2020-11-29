@@ -1,27 +1,29 @@
+//---------------------------- include section -------------------------------
 #include "io.h"
+#include <Windows.h>
 
+//---------------------------- define section---------------------------------
+#define USE_CONIO 1
 #define VC_EXTRALEAN
 #define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+//------------------------------ undef section -------------------------------
 #undef VC_EXTRALEAN
 #undef WIN32_LEAN_AND_MEAN
 
-#define USE_CONIO 1
-
 #if USE_CONIO
-
+//---------------------------- include section -------------------------------
 #include <conio.h>
-
+//---------------------------- keyboard section ------------------------------
 int Keyboard::getch()
 {
     return _getch();
 }
 
 #else // USE_CONIO
-
+//---------------------------- include section -------------------------------
 #include <vector>
 #include <optional>
-
+//---------------------------- namespce section ------------------------------
 namespace
 {
     auto buffer = std::vector<INPUT_RECORD>();
@@ -65,7 +67,7 @@ namespace
         }
     }
 }
-
+//---------------------------- keyboard section ------------------------------
 int Keyboard::getch()
 {
     while (true)
@@ -114,18 +116,18 @@ int Keyboard::getch()
 }
 
 #endif // USE_CONIO
-
+//---------------------------- namespce section ------------------------------
 namespace
 {
 COORD locToCoord(const Location& loc)
 {
     auto res = COORD{};
-    res.Y = loc.row;
-    res.X = loc.col;
+    res.Y = (SHORT)loc.row;
+    res.X = (SHORT)loc.col;
     return res;
 }
 }
-
+//----------------------------- screen section -------------------------------
 void Screen::resetLocation()
 {
     setLocation(Location(0, 0));

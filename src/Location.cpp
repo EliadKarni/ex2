@@ -3,7 +3,7 @@
  * all those functions are calculateing and comparing between 
  * Locations structs.
  */
- //---------------------------- include section -------------------------------
+//---------------------------- include section -------------------------------
 #include "Location.h"
 
 //---------------------------- functions section -----------------------------

@@ -2,21 +2,19 @@
  * ===========================================================================
  */
 //---------------------------- include section -------------------------------
-#include <iostream>
-#include <stdlib.h>
-#include <vector>
 #include "Controller.h"
+#include <iostream>
+#include <vector>
 #include "Enemy.h"
 #include "BoardReader.h"
 #include "Map.h"
-#include "io.h"
 #include "Utilities.h"
 
 //-------------------------- constractors section ----------------------------
 /*----------------------------------------------------------------------------
  * The constractor is building the Controller by initialize every member
  * in his correct constructor.
- * input: The constractor is the default constractor.
+ * input: This constractor is the default constractor.
  * output: none.
 */
 Controller::Controller() :m_boardReader(BoardReader()), m_coinsList({}),
@@ -27,7 +25,7 @@ Controller::Controller() :m_boardReader(BoardReader()), m_coinsList({}),
 /*----------------------------------------------------------------------------
  * The method is loading the level, then running the levels till the game
  * ends.
- * input: levels info file reader, the game state.
+ * input: none.
  * output: none.
 */
 void Controller::runGame() {
@@ -67,7 +65,7 @@ void Controller::printScore() {
  * The method is playing each enemy of the map turn and return if one of
  * the enemys have cached the player.
  * input: none.
- * output: if one of the enemy where able to cach the player.
+ * output: if one of the enemyes cached the player.
 */
 bool Controller::playEnemyesTurn() {
 	for (int i = 0; i < this->m_enemyList.size(); ++i) {
@@ -87,6 +85,7 @@ bool Controller::playEnemyesTurn() {
 /*----------------------------------------------------------------------------
  * The method is cheking if the player picked one of the game coins
  * if he is, the method update the needed data.
+ * also the method check if the coins need to be reprinted on the screen.
  * input: none.
  * output: none.
 */
@@ -106,7 +105,6 @@ void Controller::checkForCoinsCollect() {
 					break;
 				}
 			if (!enemyLocation) {
-				Screen::setLocation(this->m_coinsList[i]);
 				moveObject(this->m_map, this->m_coinsList[i], this->m_coinsList[i],
 					COIN);
 			}
@@ -114,7 +112,7 @@ void Controller::checkForCoinsCollect() {
 	}
 }
 /*----------------------------------------------------------------------------
- * The method update the needed data in the player deth occation
+ * The method update the needed data in case of player's death occation
  * input: none.
  * output: none.
 */

@@ -17,6 +17,6 @@ int main()
 	Controller gameContraller = Controller();
 	//-------------------------- running games -------------------------------
 	gameContraller.runGame();
-
+	//------------------------- program ending -------------------------------
 	return (EXIT_SUCCESS);
 }

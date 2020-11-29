@@ -4,8 +4,6 @@
  //---------------------------- include section -------------------------------
 #include "BoardReader.h"
 #include <fstream>
-#include <stdlib.h>
-#include <iostream>
 #include "Utilities.h"
 #include "Map.h"
 
@@ -13,6 +11,8 @@
 /*----------------------------------------------------------------------------
  * The constractor is open the levels file and then the file reader
  * is waiting to load the first stage.
+ * input: none.
+ * output: none.
 */
 BoardReader::BoardReader() {
 	this->m_boardReader.open(BOARD_PATH);
@@ -21,15 +21,15 @@ BoardReader::BoardReader() {
 }
 //---------------------------- methods section -------------------------------
 /*----------------------------------------------------------------------------
- * The method check if there is a new level to load
+ * The method check if there is a new level to load.
  * input: None.
- * output: true if there is new level and false if doesn't.
+ * output: true if there is new level and false if isn't.
 */
 bool BoardReader::thereIsNextLevel() {
-	return (isdigit(this->m_boardReader.peek()));
+	return (this->m_boardReader.peek() == '\n');
 }
 /*----------------------------------------------------------------------------
- * The method read a new level from the file into a 2D vector
+ * The method read a new level from the file into a 2D vector.
  * input: None.
  * output: the new level as a map object.
 */
@@ -43,6 +43,8 @@ Map BoardReader::readNextLevel() {
 	vector<Location> enemysLocs;
 	vector<Location> coinsLocs;
 
+	if(this->m_boardReader.peek() == '\n')
+		this->m_boardReader.get();
 	for (int i = 0; i < size; ++i) {
 		vector<char> receivedMapRow = {};
 		for (int j = 0; j < size; ++j) {
@@ -61,6 +63,7 @@ Map BoardReader::readNextLevel() {
 					terminate("player received twice!");
 				playerReceived = true;
 				playerLoc = Location(i, j);
+				receivedMapRow.push_back(LADDER);
 				receivedMapRow.push_back(NOTHING);
 				break;
 			case ENEMY:
@@ -101,9 +104,9 @@ Map BoardReader::readNextLevel() {
 }
 /*----------------------------------------------------------------------------
  * The method check if the input size are a digits and what is the
- * size of the map.
+ * size of the received map.
  * input: None
- * output: the size as an integer number.
+ * output: the size of the received map as an integer number.
 */
 int BoardReader::receiveMapSize() {
 	unsigned int size = 0;
