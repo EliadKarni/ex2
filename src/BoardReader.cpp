@@ -1,5 +1,4 @@
-/* BoardReader:
- * This class will load the levels from the file into the maps objects.
+/* BoardReader
  * ===========================================================================
  */
  //---------------------------- include section -------------------------------
